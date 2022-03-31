@@ -1,0 +1,45 @@
+h1 {
+    font-size: 65px;
+    color: orange;
+}
+
+ul {
+    background-color: beige;
+}
+
+.corfundo {
+    background-color: aquamarine;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+p {
+    font-weight: 600;
+    font-size: 3em;
+    background-color: beige;
+}
+
+body {
+    font-size: 16px;
+}
+
+li {
+    line-height: 30px;
+    text-align: center;
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#red {
+    background-color: red;
+}
+
+#brown {
+    background-color: brown;
+}
