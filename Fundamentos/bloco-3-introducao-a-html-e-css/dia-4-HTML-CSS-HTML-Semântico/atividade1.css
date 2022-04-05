@@ -1,0 +1,92 @@
+
+
+h1 {
+    text-align: center;
+}
+
+.first {
+    background-color: rgb(235, 200, 84);
+    font-size: 20px;
+    height: 50px;
+    text-align: center;
+    width: 200px;
+    position: absolute;
+    left: 458px;
+}
+
+.second {
+    background-color: rgb(219, 219, 219);
+    font-size: 20px;
+    height: 50px;
+    text-align: center;
+    width: 300px;
+    position: absolute;
+    left: 254px;
+    top: 130px;
+}
+
+.third {
+    background-color: rgb(170, 142, 106);
+    font-size: 20px;
+    height: 50px;
+    text-align: center;
+    width: 300px;
+    position: absolute;
+    left: 560px;
+    top: 130px;
+}
+
+li {
+    list-style: none;
+}
+
+h3:nth-of-type(1) {
+    position: absolute;
+    top: 200px;
+    left: 444px;
+
+}
+
+h3:nth-of-type(2) {
+    position: absolute;
+    top: 261px;
+    left: 444px;
+
+}
+
+h3:nth-of-type(3) {
+    position: absolute;
+    top: 322px;
+    left: 444px;
+
+}
+
+
+#list-1{
+    display: inline;
+    position: absolute;
+    top: 240px;
+    left: 185px;
+
+}
+
+.item{
+    display: inline;
+
+}
+
+#list-2{
+    display: inline;
+    position: absolute;
+    top: 295px;
+    left: 199px;
+
+}
+
+#list-3{
+    display: inline;
+    position: absolute;
+    top: 357px;
+    left: 199px;
+
+}
