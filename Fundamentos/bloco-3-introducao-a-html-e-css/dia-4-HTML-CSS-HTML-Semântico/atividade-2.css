@@ -40,6 +40,7 @@ list-style: circle;
 
 h3{
     color: rgb(90, 14, 14);
+    
 }
 
 .links{
@@ -54,3 +55,28 @@ footer{
     border: 2px solid white;
     height: 50px;
 }
+
+aside{
+   position: absolute;
+   right: 10px;
+    width: 15%;
+    height: 300px;
+    background-color:  rgb(177, 177, 124);
+    border-radius: 20px;
+    padding: 20px;
+    
+}
+
+#conteiner{
+    display: flex; /*para usar o aside*/
+    width: 80%;
+    padding: 10px;
+}
+
+.inline{
+    display:inline;
+    color: black;
+    line-height: 30px;
+    
+}
+
