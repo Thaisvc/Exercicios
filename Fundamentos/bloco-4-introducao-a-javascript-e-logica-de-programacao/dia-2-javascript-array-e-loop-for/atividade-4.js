@@ -66,3 +66,33 @@ if ( impar === 0){
     console.log(impar);
 
 }
+/*----------------------------------------------------------------------------------------------------*/
+let num1 = [5, 9, 300, 19, 70, 8, 100, 28, 35, 27];
+let menor = 5000; /*num1[0] poderia usar o array iniciado na 1 posiçao*/
+
+for (let indic = 0; indic < num1.length; indic += 1 ){
+   if(num1[indic] < menor){
+
+    menor = num1[indic] ;
+   }
+}
+ 
+console.log(menor);
+/*----------------------------------------------------------------------------------------------------*/
+
+let sequencia = [0]
+
+for (let indice3 = 1 ; indice3 <= 25 ; indice3 += 1){
+sequencia.push(indice3);
+    
+}
+console.log(sequencia) 
+/*----------------------------------------------------------------------------------------------------*/
+
+let sequencia2 = [0]
+
+for (let indice4 = 1 ; indice4 <= 25 ; indice4 += 1){
+sequencia2.push(indice4 / 2);
+    
+}
+console.log(sequencia2) 
