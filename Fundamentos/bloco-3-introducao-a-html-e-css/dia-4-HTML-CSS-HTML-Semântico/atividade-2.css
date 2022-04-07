@@ -1,10 +1,11 @@
 body{
-    background-color: rgb(207, 207, 167);
+    background-color: rgb(240, 240, 240);
     font-family: serif;
+    color: black;
 
 }
 .title{
-    color: rgb(112, 172, 196);
+    color: rgb(66, 137, 165);
     font-family: monospace;
     
   
