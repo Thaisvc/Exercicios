@@ -12,21 +12,40 @@
             background-color: antiquewhite;
         }
 
+        .corpo {
+
+            background-color: antiquewhite;
+        }
+
+        .corpo2 {
+
+            background-color: blue;
+        }
+
         .paragrafo {
             color: red;
             font-size: 18px;
             line-height: 25px;
             font-family: serif;
         }
+
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+        }
+        span {
+            width: 240px;
+        }
     </style>
 </head>
 
 <body>
-    <main>
+    <main class="corpo">
         <section>
             <article id="principal">
 
-                <p id="primeiro" class="paragrafo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in
+                <p  class="paragrafo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in
                     tortor viverra, pharetra mi sed,
                     tempor urna. Morbi imperdiet interdum tellus, vel maximus velit tempor in. Integer turpis odio,
                     pretium
@@ -34,13 +53,13 @@
                     sociosqu
                     ad litora torquent per conubia nostra, per inceptos himenaeos. Donec at diam vel eros consectetur
                     interdum ac euismod erat.</p>
-                <p id="segundo" class="paragrafo">Nulla purus sem, interdum eget dolor placerat, convallis laoreet
+                <p  class="paragrafo">Nulla purus sem, interdum eget dolor placerat, convallis laoreet
                     felis. Donec sed gravida dui. Sed
                     volutpat purus lacus. Mauris id mauris a nulla consequat tempor ac sit amet arcu. Quisque suscipit
                     dignissim nulla. Aliquam euismod tellus orci, at dictum sapien viverra vitae. Donec sit amet varius
                     arcu. Mauris in risus et tellus aliquet pulvinar.
                 </p>
-                <p id="terceiro" class="paragrafo">Mauris sit amet turpis non ex condimentum molestie at sit amet ex.
+                <p  class="paragrafo">Mauris sit amet turpis non ex condimentum molestie at sit amet ex.
                     Maecenas nunc turpis, dictum sit amet
                     nulla et, pharetra malesuada magna. Etiam eu sapien cursus, mattis enim ut, posuere justo. Aliquam
                     ac
@@ -49,46 +68,53 @@
 
             </article>
         </section>
-        <div>
+       
             <h1>You Choose</h1>
-            <span>Cor de fundo da tela</span>
-            <ul id="background">
-                <li>yellow</li>
-                <li>grenn</li>
-                <li>blue</li>
-                <li>pink</li>
-            </ul>
-            <span>Cor do texto</span>
-            <ul id="textColor">
-                <li>black</li>
-                <li>grenn</li>
-                <li>blue</li>
-                <li>pink</li>
-            </ul>
-            <span>Tamanho da fonte</span>
-            <ul id="fontSize">
-                <li>15</li>
-                <li>11</li>
-                <li>20</li>
-                <li>8</li>
-            </ul>
-            <span>Espaçamento entre as linhas do texto</span>
-            <ul id="spacing">
-                <li>25</li>
-                <li>31</li>
-                <li>20</li>
-                <li>15</li>
-            </ul>
-            <span>Tipo da fonte ( Font family ).
-            </span>
-            <ul id="Typefont">
-                <li>monospace</li>
-                <li>Arial</li>
-                <li>sans-serif</li>
-                <li>serif</li>
-            </ul>
+            <section class="opcoes">
+                <span>Cor de fundo da tela</span>
+                <button>yellow</button>
+                <button>grenn</button>
+                <button>blue</button>
+                <button>pink</button>
+            </section>
+            <section class="opcoes">
+                <span>Cor do texto</span>
+                    <button>black</button>
+                    <button>grenn</button>
+                    <button>blue</button>
+                    <button>pink</button>
+                
+            </section>
+            <section class="opcoes">
 
-        </div>
+                <span>Tamanho da fonte</span>
+                    <button>15</button>
+                    <button>11</button>
+                    <button>20</button>
+                    <button>8</button>
+            </section>
+            <section class="opcoes">
+
+                <span>Espaçamento entre as linhas do texto</span>
+               
+                    <button>25</button>
+                    <button>31</button>
+                    <button>20</button>
+                    <button>15</button>
+              
+            </section>
+            <section class="opcoes">
+
+                <span>Tipo da fonte ( Font family ).
+                </span>
+                
+                    <button>monospace</button>
+                    <button>Arial</button>
+                    <button>sans-serif</button>
+                    <button>serif</button>
+                
+            </section>
+       
 
     </main>
 
