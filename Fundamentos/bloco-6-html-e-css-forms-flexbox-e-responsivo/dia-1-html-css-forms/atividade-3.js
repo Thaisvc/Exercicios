@@ -1,12 +1,10 @@
 /* const inputNoticia = document.getElementById('') */
 /* const inputDestino = document.getElementById('') */
-/* const inputCheckbox = document.getElementById('') */
-const btnEnvia = document.getElementById('btn-enviar');
 const btnELimpa = document.getElementById('btn-limpa');
 
-btnEnvia.addEventListener('click', (event) =>{
-    event.preventDefault();
-})
+/* btnEnvia.addEventListener('click', (event) =>{
+  event.preventDefault();
+}) */
 
 
 btnELimpa.addEventListener('click', clear)
@@ -23,11 +21,18 @@ const textArea = document.querySelector('textarea');
 textArea.value = '';
 }
 
+let inputCheckbox = document.getElementById('noticia2');
+const btnEnvia = document.getElementById('btn-enviar');
+btnEnvia.disabled = true;
+inputCheckbox.addEventListener('change', ()=> {
+  if (inputCheckbox.checked) {
+    btnEnvia.disabled = false; 
+  } else {
+    btnEnvia.disabled = true;
 
+  }
 
-
-
-
+})
 
 
 
