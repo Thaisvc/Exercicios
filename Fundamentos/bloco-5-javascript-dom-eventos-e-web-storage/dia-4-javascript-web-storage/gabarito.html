@@ -59,6 +59,56 @@
         })
       }
 
+      // font-color
+      let fontColorButtons = document.querySelectorAll("#font-color>button")
+      for (let index = 0; index < fontColorButtons.length; index += 1) {
+        fontColorButtons[index].addEventListener("click", function(event) {
+          setFontColor(event.target.innerHTML)
+        })
+      }
+
+      // font-size
+      let fontSizeButtons = document.querySelectorAll("#font-size>button")
+      for (let index = 0; index < fontSizeButtons.length; index += 1) {
+        fontSizeButtons[index].addEventListener("click", function(event) {
+          setFontSize(event.target.innerHTML)
+        })
+      }
+
+      // line-height
+      let lineHeightButtons = document.querySelectorAll("#line-height>button")
+      for (let index = 0; index < lineHeightButtons.length; index += 1) {
+        lineHeightButtons[index].addEventListener("click", function(event) {
+          setLineHeight(event.target.innerHTML)
+        })
+      }
+
+      // font-family
+      let fontFamilyButtons = document.querySelectorAll("#font-family>button")
+      for (let index = 0; index < fontFamilyButtons.length; index += 1) {
+        fontFamilyButtons[index].addEventListener("click", function(event) {
+          setFontFamily(event.target.innerHTML)
+        })
+      }
+
+      function initialize() {
+        let backgroundColor = localStorage.getItem("backgroundColor")
+        if (backgroundColor) setBackgroundColor(backgroundColor)
+
+        let fontColor = localStorage.getItem("fontColor")
+        if (fontColor) setFontColor(fontColor)
+
+        let fontSize = localStorage.getItem("fontSize")
+        if (fontSize) setFontSize(fontSize)
+
+        let lineHeight = localStorage.getItem("lineHeight")
+        if (lineHeight) setLineHeight(lineHeight)
+
+        let fontFamily = localStorage.getItem("fontFamily")
+        if (fontFamily) setFontFamily(fontFamily)
+      }
+
+      initialize()
     }
   </script>
 </head>
