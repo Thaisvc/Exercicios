@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="atividade3.css">
+    <title>atividade 3</title>
+</head>
+
+<body>
+    <form method="get">
+        <fieldset>
+            <label for="input-name"> Nome :
+                <input type="text" min="10" max="40" id="input-name" class="inputs" name="nome-completo"
+                    placeholder="Digite Seu Nome Completo" />
+            </label><br>
+            <label for="input-email"> E-mail:
+                <input type="email" min="10" max="50" id="input-email" class="inputs" name="email"
+                    placeholder="Digite Seu E-mail" />
+            </label><br>
+            <label for="input-destino1" class="texto">
+                <input type="radio" id="input-destino1" class="inputRadio" name="destino" /> Cidade
+            </label>
+            <label for="input-destino2" class="texto">
+                <input type="radio" id="input-destino2" class="inputRadio" name="destino" /> Campo
+            </label>
+            <label for="input-destino3" class="texto">
+                <input type="radio" id="input-destino3" class="inputRadio" name="destino" /> Praia
+            </label>
+            <label for="input-destino4" class="texto">
+                <input type="radio" id="input-destino4" class="inputRadio" name="destino" /> Montanhas
+            </label><br><br>
+            <!-- O maxlengthatributo especifica o número máximo de caracteres permitidos no <input>elemento. -->
+            <textarea name="texto" id="text-area" cols="30" rows="10" maxlength="500"></textarea><br><br>
+            <label for="date">
+                <input type="date" id="date"> Qual a melhor data para realizar sua viagem?
+            </label><br>
+            <br>
+            <label for="noticia1">
+                <input type="checkbox" id="noticia1" name="noticia" /> Gostaria de receber outras incríveis
+                oportunidades oferecidas pela Trybe?
+            </label><br><br>
+            <label for="noticia2">
+                <input type="checkbox" id="noticia2" name="noticia" /> Concordo que imagens das minhas férias poderão
+                ser usadas na divulgação de concursos futuros.
+            </label><br>
+        </fieldset>
+        <button type="submit" id="btn-enviar" >Enviar</button>
+        <button type="button" id="btn-limpa">Limpar</button>
+        <!-- reset limpa todo o formulario
+        <button type="reset" id="btn-limpa">Limpar</button> -->
+    </form>
+    <script src="atividade-3.js"></script>
+</body>
+
+</html>
+
+
+<!-- GABARITO
+Solução:
+Para solucionar esse exercício vamos fazer um passo a passo, ou seja, iremos passar por todas as seções que devem ser criadas.
+Embora não seja um dos requisitos, se vamos criar um formulário, devemos também criar a tag <form> . Também vamos seguir a dica que nos foi dada e colocar a tag <fieldset> :
+
+
+<body>
+  <h1>Concorra à Viagem dos seus sonhos com a TrybeTrip</h1>
+  <form>
+  <fieldset></fieldset>
+  </form>
+O primeiro campo dos requisitos que devemos criar é o campo de nome completo com limites para o mínimo e máximo de caracteres. Faremos isso dentro das tags <fieldset> .
+
+
+<body>
+  <h1>Concorra à Viagem dos seus sonhos com a TrybeTrip</h1>
+  <fieldset>
+      <label for="fullName">Nome Completo:</label>
+      <input type="text" id="fullName" name="fullName" placeholder="Digite seu nome completo" maxlength="40" minlength="10" required>      
+      <br>
+  </fieldset>
+O próximo é o campo de email. Ele tem um tipo diferente do input passado. O campo anterior tinha o tipo text , já esse terá o tipo email . O limite máximo de caracteres aumenta para 50. Posicione-o logo abaixo do anterior. Esse campo terá uma estrutura parecida com a seguinte:
+
+
+      <label for="email">Endereço de e-mail:</label>
+      <input type="email" id="email" name="email" placeholder="Digite seu e-mail" maxlength="50"   minlength="10" required>
+      <br>
+Agora é a vez dos radio Buttons, como são muito parecidos vamos demonstrar como ficam os 4 juntos. Note que a importância das labels aqui é ainda maior, pois você pode selecionar uma opção ao clicar no texto. Você deve no final ter um código parecido com esse:
+
+
+      <label for="destination1">Cidade</label>
+      <input type="radio" id="destination1" className="radios" name="destinations" value="Cidade" required>
+      <label for="destination2">Campo</label>
+      <input type="radio" id="destination2" className="radios" name="destinations" value="Campo" required>
+      <label for="destination3">Praia</label>
+      <input type="radio" id="destination3" className="radios" name="destinations" value="Praia" required>
+      <label for="destination4">Montanhas</label>
+      <input type="radio" id="destination4" className="radios" name="destinations" value="Montanhas" required>
+      <br>
+Agora é a vez da text area, text areas são muito parecidas com os inputs de tipo texto, mas são mais robustos e normalmente utilizados quando sabemos que o input será mais longo. Dentro dos atributos podemos ainda definir o tamnho dela através do cols e do rows que devem receber um número que representa a quantidade de linhas e colunas daquela textArea . Outro aspecto legal é que a pessoa pode expandir o tamanho da caixa para visualizar do jeito que preferir. Nosso código deve ficar assim:
+
+
+      <label for="why">Por que você deveria ser a pessoa desenvolvedora escolhida pelo concurso TrybeTrip? </label>
+      <br />
+      <textarea name="why" id="why" cols="60" rows="10" placeholder=>Digite sua resposta vencedora aqui</textarea>
+      <br />
+Estamos quase chegando no final desse exercício, agora vamos fazer um input de data, e para isso utilizaremos o type="date" . O que nos dará um input com formato de data e também a opção de selecionarmos a data através de um calendário. Esse input deve ficar assim:
+
+
+      <label for="date">Qual a melhor data para realizar sua viagem?</label>
+      <input type="date" id="date">
+      <br />
+Bacana, né? Os últimos dois inputs são do mesmo tipo, porém só um é obrigatório. E para finalizar, a ultima parte de nosso HTML para esse exercício deve ficar assim:
+
+
+      <label for="promo">Gostaria de receber outras incríveis oportunidades oferecidas pela Trybe. </label>
+      <input type="checkbox" name="promo" id="promo">
+      <br />
+      <label for="agreement">Concordo que imagens de minhas férias poderão ser usadas na divulgação de concursos futuros.</label>
+      <input type="checkbox" name="agreement" id="agreement" required>
+2. Crie um botão para enviar as informações preenchidas.
+Agora vamos utilizar um pouco de javascript, para isso crie o arquivo script.js e o referencie no HTML.
+Dica: Coloque a tag <script> no final do seu body.
+Solução:
+
+
+</fieldset>
+    <button type="submit" id="submit-btn">Participar do concurso TrybeTrip</button>
+ -->

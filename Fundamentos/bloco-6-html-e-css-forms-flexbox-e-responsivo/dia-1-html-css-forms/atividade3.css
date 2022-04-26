@@ -1,0 +1,34 @@
+.inputs{
+    width: 200px;
+    height: 20px;
+    margin: 5px;
+    border: solid 2px gray;
+}
+
+fieldset{
+    border: solid 2px black;
+    
+}
+label{
+    color: grey;
+font-size: 18px;
+}
+.texto{
+    font-size: 14px;
+
+}
+#date{
+    border: solid 2px gray;
+    color: grey;
+
+}
+button{
+    border: solid 2px gray;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    margin-top: 8px;
+    margin-left: 5px;
+    color: grey;
+
+}
