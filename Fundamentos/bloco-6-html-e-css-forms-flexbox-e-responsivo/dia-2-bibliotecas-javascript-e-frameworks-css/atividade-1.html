@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <form method="get" id="form">
+    <form action="#" id="form">
         <fieldset>
             <div class="form-group">
                 <label for="input-name"> Nome :</label>
@@ -48,7 +48,9 @@
 
             <textarea class="form-control" name="texto" id="text-area" cols="30" rows="10" maxlength="500"></textarea>
             <label for="date"> </label>
-            <input type="text" class="form-control" id="date"> Qual a melhor data para realizar sua viagem?
+
+            <input type="text" class="form-control" id="date" data-validate-field="date"> Qual a melhor data para
+            realizar sua viagem?
 
 
             <div class="custom-control custom-checkbox">
@@ -70,11 +72,13 @@
 
     </form>
     <script src="pikaday.js"></script>
-<script>
-    var picker = new Pikaday({ field: document.getElementById('date') });
-    const validate = new window.JustValidate('#form');
-</script>
-   
+    <script>
+        var picker = new Pikaday({
+            field: document.getElementById('date')
+        });
+        const validate = new window.JustValidate('#form');
+    </script>
+
 </body>
 
 </html>
