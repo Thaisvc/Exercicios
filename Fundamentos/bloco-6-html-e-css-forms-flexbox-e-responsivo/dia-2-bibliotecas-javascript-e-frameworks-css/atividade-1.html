@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+    <title>atividade 3</title>
+</head>
+
+<body>
+    <form method="get">
+        <fieldset>
+            <div class="form-group">
+                <label for="input-name"> Nome :</label>
+                <input type="text" class="form-control" min="10" max="40" id="input-name" class="inputs"
+                    name="nome-completo" placeholder="Digite Seu Nome Completo" />
+
+            </div>
+
+            <div class="form-group">
+                <label for="input-email"> E-mail:</label>
+                <input type="email" class="form-control" min="10" max="50" id="input-email" class="inputs" name="email"
+                    placeholder="Digite Seu E-mail" />
+
+            </div>
+            <div class="form-group form-check"></div>
+            <label class="form-check-label" for="input-destino1" class="texto"> </label>
+            <input type="radio" class="form-check-input" id="input-destino1" class="inputRadio" name="destino" /> Cidade
+
+            <label class="form-check-label" for="input-destino2" class="texto"> </label>
+            <input type="radio" class="form-check-input" id="input-destino2" class="inputRadio" name="destino" /> Campo
+
+            <label class="form-check-label" for="input-destino3" class="texto"></label>
+            <input type="radio" class="form-check-input" id="input-destino3" class="inputRadio" name="destino" /> Praia
+
+            <label class="form-check-label" for="input-destino4" class="texto"></label>
+            <input type="radio" class="form-check-input" id="input-destino4" class="inputRadio" name="destino" />
+            Montanhas
+
+            </div>
+
+            <textarea class="form-control" name="texto" id="text-area" cols="30" rows="10" maxlength="500"></textarea>
+            <label for="date"> </label>
+            <input type="date" class="form-control" id="date"> Qual a melhor data para realizar sua viagem?
+
+
+            <div class="custom-control custom-checkbox">
+                <label for="noticia1"></label>
+                <input type="checkbox" class="custom-control-input" id="noticia1" name="noticia" /> Gostaria de receber
+                outras incríveis
+                oportunidades oferecidas pela Trybe?
+
+
+                <label for="noticia2"> </label>
+                <input type="checkbox" class="custom-control-input" id="noticia2" name="noticia" /> Concordo que imagens
+                das minhas férias poderão
+                ser usadas na divulgação de concursos futuros.
+
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-outline-success" id="btn-enviar">Enviar</button>
+        <button type="button" class="btn btn-outline-warning" id="btn-limpa">Limpar</button>
+
+    </form>
+    <script src="atividade-1.js"></script>
+</body>
+
+</html>
