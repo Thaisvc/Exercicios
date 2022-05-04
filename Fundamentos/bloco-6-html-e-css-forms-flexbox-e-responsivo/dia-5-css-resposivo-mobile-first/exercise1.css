@@ -51,7 +51,6 @@ figcaption {
     }
 
     main {
-        border: 4px solid black;
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
@@ -59,7 +58,6 @@ figcaption {
     }
 
     section {
-        border: 3px solid black;
         display: flex;
         width: 100%;
         flex-wrap: wrap;
@@ -70,7 +68,6 @@ figcaption {
 
     figure {
         display: flex;
-        border: 3px solid rgb(215, 23, 23);
         margin: 0;
         justify-content: space-evenly;
         flex-direction: row;
@@ -78,11 +75,7 @@ figcaption {
         width: 165px;
     }
 
-    figcaption {
-        border: 3px solid rgb(5, 73, 21);
-
-
-    }
+  
 }
 
 @media screen and (min-width: 800px) {
@@ -93,3 +86,99 @@ figcaption {
         max-width: 80%;
     }
 }
+
+/*
+/*
+ * @see http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * apply a natural box layout model to all elements, but allowing components to change
+ */
+/* html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 5px;
+    font-size: 18px;
+}
+
+article {
+    font-size: 14;
+
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+
+}
+
+img {
+    max-width: 100%;
+}
+
+main {
+
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+figure {
+    margin: 0;
+    background: #5c6158;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+
+}
+
+figcaption {
+    font-size: .8em;
+}
+
+@media screen and (min-width: 790){
+    body {
+        background: rgba(21, 21, 159, 0.2);
+        margin: 25px 6%;
+      }
+    
+      figure {
+        width: 45%;
+        margin-right: 4.5%;
+      }
+ }
+ 
+ 
+
+
+
+
+@media screen and (min-width: 1000px){
+   body{
+       background-color: rgba(103, 105, 100, 0.219);
+       font-size: 1.5em;
+       margin: 25px 10%;
+       max-width: 1130px;
+   }
+   figure {
+    width: 30%;
+    margin-right: 2%;
+    text-align: center;
+  }
+}
+
+
+*/
