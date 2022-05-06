@@ -4,4 +4,19 @@ document.querySelector('button').addEventListener('click', () => {
   let numero = parseInt(contador.textContent) + 1;
   contador.textContent = numero;
 });
-//O parseIntmétodo analisa um valor como uma string e retorna o primeiro inteiro. https://www.w3schools.com/jsref/jsref_parseint.asp
+//GABARITO
+/* <!DOCTYPE html>
+<body>
+  <div>
+    <span id ="text"></span>
+  </div>
+  <button id="button_test">click aqui!</button>
+</body>
+<script>
+  let clickCount = 0;
+  let textToDisplay = document.getElementById("text");
+
+  document.getElementById("button_test")
+          .addEventListener("click", () => textToDisplay.innerHTML = clickCount += 1);
+</script>
+</html> */
