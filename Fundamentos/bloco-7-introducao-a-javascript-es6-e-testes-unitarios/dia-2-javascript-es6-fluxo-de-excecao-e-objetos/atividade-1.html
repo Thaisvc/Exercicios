@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <p>Informe dois números para realizar a soma:</p>
+    <label for='value1'>Valor 1:</label>
+    <input type='text' id='value1'>
+    <label for='value2'>Valor 2:</label>
+    <input type='text' id='value2'>
+    <button id='button'>Somar</button>
+    <p id='result'></p>
+    <script>
+        /*  de 1 a2 
+       
+       const verifica = (value1, value2) => {
+            if (isNaN(value1) || isNaN(value2)) {
+                throw new Error('Informe apenas números ');
+            }
+
+            if (!value1 || !value2) {
+                throw new Error('Informe os dois valores para realizar a soma');
+            }
+        }
+
+
+
+        const sum = () => {
+            try {
+                const value1 = document.getElementById('value1').value;
+                const value2 = document.getElementById('value2').value;
+                verifica(value1, value2);
+                const result = parseInt(value1) + parseInt(value2);
+                document.getElementById('result').innerHTML = `Resultado: ${result}`;
+                document.getElementById('value1').value = '';
+                document.getElementById('value2').value = '';
+            } catch (error) {
+                document.getElementById('result').innerHTML = `Erro: ${error.message}`;
+                document.getElementById('value1').value = '';
+                document.getElementById('value2').value = '';
+            }
+           
+
+        }
+        window.onload = () => {
+            const button = document.getElementById('button');
+            button.addEventListener('click', sum);
+        } */
+
+        /*3  usando finaly */
+        const verifica = (value1, value2) => {
+            if (isNaN(value1) || isNaN(value2)) {
+                throw new Error('Informe apenas números ');
+            }
+
+            if (!value1 || !value2) {
+                throw new Error('Informe os dois valores para realizar a soma');
+            }
+        }
+
+
+
+        const sum = () => {
+            try {
+                const value1 = document.getElementById('value1').value;
+                const value2 = document.getElementById('value2').value;
+                verifica(value1, value2);
+                const result = parseInt(value1) + parseInt(value2);
+                document.getElementById('result').innerHTML = `Resultado: ${result}`;
+
+            } catch (error) {
+                document.getElementById('result').innerHTML = `Erro: ${error.message}`;
+
+            } finally {
+                document.getElementById('value1').value = '';
+                document.getElementById('value2').value = '';
+            }
+
+
+        }
+        window.onload = () => {
+            const button = document.getElementById('button');
+            button.addEventListener('click', sum);
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+<!-- 
+Gabarito dos exercícios
+Parte I
+Código utilizado nos exercícios:
+Copiar
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Calculadora</title>
+</head>
+<body>
+  <p>Informe dois números para realizar a soma:</p>
+  <label for='value1'>Valor 1:</label>
+  <input type='text' id='value1'>
+  <label for='value2'>Valor 2:</label>
+  <input type='text' id='value2'>
+  <button id='button'>Somar</button>
+  <p id='result'></p>
+  <script>
+    function sum() {
+      const value1 = document.getElementById('value1').value;
+      const value2 = document.getElementById('value2').value;
+      const result = parseInt(value1) + parseInt(value2);
+      
+      document.getElementById('result').innerHTML = `Resultado: ${result}`;
+      document.getElementById('value1').value = '';
+      document.getElementById('value2').value = '';
+    }
+    window.onload = () => {
+      const button = document.getElementById('button');
+      button.addEventListener('click', sum);
+    }
+  </script>
+</body>
+</html>
+Exercício 1
+1 - Crie um erro personalizado que será chamado se a pessoa usuária digitar apenas um número.
+Tente executar a aplicação com um dos valores em branco. Notou que o retorno não é muito descritivo?
+Utilize o throw new Error e o bloco try/catch.
+Imprima o erro no parágrafo com id result, para que a pessoa usuária saiba o que aconteceu. Lembre-se de usar erros descritivos!
+Evite funções que tenham muitas responsabilidades distintas.
+Solução
+Copiar
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Calculadora</title>
+</head>
+<body>
+  <p>Informe dois números para realizar a soma:</p>
+  <label for='value1'>Valor 1:</label>
+  <input type='text' id='value1'>
+  <label for='value2'>Valor 2:</label>
+  <input type='text' id='value2'>
+  <button id='button'>Somar</button>
+  <p id='result'></p>
+  <script>
+    function verifyIsNumber(value1, value2) {
+      if (!value1 || !value2) {
+        throw new Error('Informe os dois valores para realizar a soma');
+      }
+    }
+
+    function sum() {
+      try {
+        const value1 = document.getElementById('value1').value;
+        const value2 = document.getElementById('value2').value;
+        verifyIsNumber(value1, value2);
+        const result = parseInt(value1) + parseInt(value2);
+        document.getElementById('result').innerHTML = `Resultado: ${result}`;
+        document.getElementById('value1').value = '';
+        document.getElementById('value2').value = '';
+      } catch (error) {
+        document.getElementById('result').innerHTML = `Erro: ${error.message}`;
+        document.getElementById('value1').value = '';
+        document.getElementById('value2').value = '';
+      }
+    }
+    window.onload = () => {
+      const button = document.getElementById('button');
+      button.addEventListener('click', sum);
+    }
+  </script>
+</body>
+</html>
+Exercício 2
+2 - Agora adicione uma outra exceção, caso a pessoa usuária digite um valor que não seja numérico.
+Você pode fazer essa verificação utilizando a função isNan().
+Copiar
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Calculadora</title>
+</head>
+<body>
+  <p>Informe dois números para realizar a soma:</p>
+  <label for='value1'>Valor 1:</label>
+  <input type='text' id='value1'>
+  <label for='value2'>Valor 2:</label>
+  <input type='text' id='value2'>
+  <button id='button'>Somar</button>
+  <p id='result'></p>
+  <script>
+    function verifyIsNumber(value1, value2) {
+      if (isNaN(value1) || isNaN(value2)) {
+        throw new Error('Informe apenas números para realizar a soma');
+      }
+
+      if (!value1 || !value2) {
+        throw new Error('Informe os dois valores para realizar a soma');
+      }
+    }
+
+    function sum() {
+      try {
+        const value1 = document.getElementById('value1').value;
+        const value2 = document.getElementById('value2').value;
+        verifyIsNumber(value1, value2);
+        const result = parseInt(value1) + parseInt(value2);
+        document.getElementById('result').innerHTML = `Resultado: ${result}`;
+        document.getElementById('value1').value = '';
+        document.getElementById('value2').value = '';
+      } catch (error) {
+        document.getElementById('result').innerHTML = `Erro: ${error.message}`;
+        document.getElementById('value1').value = '';
+        document.getElementById('value2').value = '';
+      }
+    }
+    window.onload = () => {
+      const button = document.getElementById('button');
+      button.addEventListener('click', sum);
+    }
+  </script>
+</body>
+</html>
+Exercício 3
+3 - Você se lembrou de limpar os inputs após o clique do botão? Teve que repetir código para isso? Que tal refatorar sua função utilizando o finally?
+Copiar
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Calculadora</title>
+</head>
+<body>
+  <p>Informe dois números para realizar a soma:</p>
+  <label for='value1'>Valor 1:</label>
+  <input type='text' id='value1'>
+  <label for='value2'>Valor 2:</label>
+  <input type='text' id='value2'>
+  <button id='button'>Somar</button>
+  <p id='result'></p>
+  <script>
+    function verifyIsNumber(value1, value2) {
+      if (isNaN(value1) || isNaN(value2)) {
+        throw new Error('Informe apenas números para realizar a soma');
+      }
+
+      if (!value1 || !value2) {
+        throw new Error('Informe os dois valores para realizar a soma');
+      }
+    }
+    
+    function sum() {
+      try {
+        const value1 = document.getElementById('value1').value;
+        const value2 = document.getElementById('value2').value;
+        verifyIsNumber(value1, value2);
+        const result = parseInt(value1) + parseInt(value2);
+        document.getElementById('result').innerHTML = `Resultado: ${result}`;
+      } catch (error) {
+        document.getElementById('result').innerHTML = `Erro: ${error.message}`;
+      } finally {
+        document.getElementById('value1').value = '';
+        document.getElementById('value2').value = '';
+      }
+    }
+    window.onload = () => {
+      const button = document.getElementById('button');
+      button.addEventListener('click', sum);
+    }
+  </script>
+</body>
+</html>
+ -->
