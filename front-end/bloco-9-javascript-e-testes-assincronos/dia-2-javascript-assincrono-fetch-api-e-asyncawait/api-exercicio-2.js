@@ -24,7 +24,7 @@ async function moedas() {
 const setCoins = async (data) => {
   const coinsList = document.getElementById('coins-list');
   data
-    .filter((_, index) => index < 20)
+    .filter(( a, index) => index < 10)
     .forEach((coin) => {
       const newLi = document.createElement('li');
       newLi.innerText = `${coin.name} (${coin.symbol}): ${coin.priceUsd}`;
@@ -36,3 +36,22 @@ window.onload = moedas;
 
 // a funçao moedas ela busca os dados da api trata eles e chama a funçao setCoins passando os dados/resultado/resposta da api buscada
 // a funçao setCoins ela cria as linhas e exibe o resutado passado como parametro os moedas
+
+//-------------------------------------------
+
+
+async function converterMoeda() {
+  //chamando a api/await trata o retorno positivo da promises/await passa a resposta para a variavel pronises entao ela nao e mais uma promeses e sim a respota de uma
+  //await espera a promeses de fetch retornar a resposta
+  try {
+    const response = await fetch('https://api.coincap.io/v2/assets/');//tratamos a primeira promeses
+    const data = await response.json();// transforma em formato jason os dados q queremos
+    //console.log(data);
+    const resul = await data.data
+    setCoins(resul)
+    //console.log(resul)
+  } catch (error) {
+    console.log('Vishi deu erro')
+  }
+ 
+}
