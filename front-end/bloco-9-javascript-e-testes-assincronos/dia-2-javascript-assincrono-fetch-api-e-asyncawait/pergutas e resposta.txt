@@ -1,0 +1,29 @@
+1- O que é um código que é executado de modo assíncrono? Qual é a diferença disso para um código que é executado de modo síncrono?
+
+codigo assicrono e executado em segundo plano segunda fila ele esta esperando algo se resolver ou resovendo algo enquanto o codigo sicrono e resovido de imediato na ordem em q foi escrito
+
+
+
+2- Quando você tem que enfileirar várias callbacks, que problema surge?
+
+ocorre o cllback hell prejudica o entendimento do codigo
+
+
+
+3- Por que as Promises são uma forma de resolver esse problema?
+
+promises controla o fluxo assicrono
+https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+
+
+
+4- Quando você vai se comunicar com uma API, tal comunicação deve ser síncrona ou assíncrona? Lembre-se de que o serviço ao qual você está se conectando pode demorar muito ou pouco para dar retorno, pode estar fora do ar etc.
+
+esta comunicaçao e assicrona pois e feita um request q aguarda uma response
+
+
+
+
+5- Dada a resposta anterior, o que é fetch e para que ele serve?
+https://developer.mozilla.org/pt-BR/docs/Web/API/fetch
