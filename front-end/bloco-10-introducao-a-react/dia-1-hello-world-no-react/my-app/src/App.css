@@ -1,3 +1,8 @@
+body{
+  background: #0b1f3d;
+  margin: 0px;
+  padding: 0px;
+}
 .App {
   text-align: center;
 }
@@ -35,4 +40,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.header{
+  background-color: rgb(147, 162, 157);
+  height: 100px;
+}
+.footer{
+  background-color: rgb(147, 162, 157);
+  height: 100px;
+
+}
+
+.card:hover{
+  background-color: rgb(113, 215, 181);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.card h3 {
+  font-size: 22px;
+}
+
+.card p{
+  font-style: italic;
+  cursor:pointer;
 }

@@ -33,7 +33,7 @@ class ContentE extends React.Component {
             <p> {conteudos.map(position => 
             <>
             <div 
-             key={position.conteudo}>
+             key={position.conteudo} className = "card">
             <h3> {`O conteúdo é: ${position.conteudo}`}</h3> 
             <p> {`Status:  ${ position.status}`}</p> 
             <p> {`Bloco:  ${position.bloco}`}</p> 
