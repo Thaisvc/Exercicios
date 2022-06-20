@@ -1,10 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import Cat from './cat.jpg';
+import Image from './Image';
 
 function App() {
   return (
-    <div>
-    </div>
+    <>
+      <Image source= {Cat} alternativeText="Cute cat staring" />
+    </>
   );
 }
 
