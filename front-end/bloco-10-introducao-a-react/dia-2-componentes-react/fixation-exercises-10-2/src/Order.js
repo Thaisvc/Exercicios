@@ -3,7 +3,7 @@ import React from 'react';
 
 class Order extends React.Component {
   render() {
-    const { user, product, price } = this.props.order;
+    const { user, product, price } = this.props.orde;
 
     return (
       <div className="order">
