@@ -30,3 +30,8 @@ code {
   box-shadow: 5px 8px rgb(116 116 219);
   width: 200px;
 }
+
+.card:hover {
+  background-color: rgb(162, 164, 230);
+
+}
