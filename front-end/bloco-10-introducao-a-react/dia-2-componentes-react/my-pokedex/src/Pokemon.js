@@ -1,9 +1,11 @@
 import React from 'react';
 import Image from './image';
+import PropTypes from 'prop-types';
 class Pokemon extends React.Component {
     render() {
         return (
             <>
+            
                 <div className='card'>
                     <p> Nome:{" "}{this.props.pokem.name}</p>
                     <p> tipo:{" "}{this.props.pokem.type}</p>
@@ -14,5 +16,16 @@ class Pokemon extends React.Component {
         )
     }
 }
+Pokemon.propTypes = {
+  pokemon: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    averageWeight: PropTypes.shape({
+      measurementUnit: PropTypes.string,
+      value: PropTypes.number,
+    }),
+    image: PropTypes.string,
+  }).isRequired,
+};
 
 export default Pokemon;
