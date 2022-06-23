@@ -1,0 +1,173 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+.container {
+    border: 5px solid red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0px 40px;
+
+}
+
+.aside-one h2 {
+    border: 5px solid rgb(64, 255, 0);
+
+    text-align: center;
+
+
+}
+
+.aside-two h2 {
+    border: 5px solid rgb(0, 34, 255);
+
+    text-align: center;
+}
+
+.main-content {
+    border: 5px solid rgb(255, 0, 195);
+
+    font-size: 18px;
+    margin: 10px 60px;
+}
+
+
+
+
+.linhas {
+
+    display: flex;
+    justify-content: space-between;
+}
+
+/*TELA MEDIA*/
+
+@media screen and (min-width: 768px) and (max-width: 1024px ){
+    body {
+        background: rgb(208, 159, 202);
+        margin: 3px 10px 3px 10px;
+    }
+
+    header p {
+        display: flex;
+        font-size: 20px;
+        margin: 5px 190px;
+    }
+    .linhas {
+        justify-content: space-evenly;
+    }
+    
+    .main-content {
+        border: 5px solid rgb(255, 0, 195);
+        font-size: 25px;
+        margin: 10px 0px;
+    }
+   
+  
+    .container {
+        flex-direction: column;
+    }
+}
+
+/*TELA PEQUENA*/
+
+@media screen and (max-width: 767PX ){
+
+    body{
+        background: rgb(95, 179, 202);
+        margin: 0px;
+    }
+   
+    .main-content {
+        border: 5px solid rgb(255, 0, 195);
+        font-size: 28px;
+        margin: 10px 0px;
+    }
+    .container {
+        flex-direction: column;
+    }
+    .linhas {
+        justify-content: space-evenly;
+    }
+    header p {
+        display: flex;
+        font-size: 15px;
+        margin: 5px 50px;
+        width: 100%;
+    }
+}
+
+
+/*GABARITO,
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.container {
+  display: flex;
+}
+
+p {
+  padding: 20px;
+}
+
+/* TODO */
+
+/* Aqui está o primeiro breakpoint e os estilos definidos para ele 
+
+@media screen and (max-width: 600px) {
+    body {
+      background-color: lightcoral;
+      font-family: sans-serif;
+    }
+    .container {
+      flex-direction: column;
+    }
+  
+    p {
+      padding: 0 5px;
+      line-height: 1.5em;
+    }
+  
+    
+  }
+  
+  /* Aqui está o segundo breakpoint e os estilos definidos para ele 
+  
+  @media screen and (min-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  
+    .container {
+      flex-wrap: wrap;
+    }
+  
+    
+  }
+  
+  /* Aqui está o terceiro breakpoint e os estilos definidos para ele 
+  
+  @media screen and (min-width: 1000px) {
+    body {
+      background-color: lightgreen;
+    }
+  
+    .container {
+      flex-wrap: nowrap;
+    }
+  
+  }*/

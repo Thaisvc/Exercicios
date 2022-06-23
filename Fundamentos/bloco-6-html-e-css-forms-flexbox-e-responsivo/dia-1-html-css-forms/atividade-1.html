@@ -1,0 +1,59 @@
+Vamos praticar um pouco, criando uma tela de login? 🔥<BR>
+1 - Adicione os campos de entrada para email e senha.<BR>
+2 - Adicione um checkbox com o texto Lembre-me .<BR>
+3 - Adicione um botão com o texto Entrar .<BR>
+4 - Adicione os placeholder Digite seu email e Digite sua senha para os campos de email e senha.<BR>
+5 - Adicione o atributo required para os campos de email e senha.<BR>
+6 - Adicione o atributo autocomplete="off" para o campo de email.<BR>
+7 - Adicione o atributo autofocus para o campo de email.<BR>
+
+  <BR><BR>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+</head>
+
+<body>
+    <form method="get">
+        <!--    autocomplete : especifica se um campo de entrada deve ter o preenchimento automático ativado ou desativado.
+        autofocus : especifica que um campo de entrada deve obter foco automaticamente quando a página é carregada; -->
+        <input type="email" name="email" placeholder="Digite seu email " required autocomplete="off" autofocus> E-mail
+        </input> <br>
+        <input type="password" name="senha" placeholder="Digite sua senha" required>Senha </input> <br>
+        <label for="input-checkbox">
+            <input type="checkbox" name="lembre" id="input-checkbox"> Lembre-me</input><br>
+        </label>
+        <button type="submit">Entrar</button>
+    </form>
+</body>
+
+</html>
+
+
+
+
+<!-- GABARITO
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    Email: <input type="text" name="email" type="text" placeholder="Digite seu email" autocomplete="off" required autofocus></br>
+    Senha: <input type="password" name="senha" type="text" placeholder="Digite sua senha" required></br>
+    Lembre-me: <input type="checkbox" name="lembrar" type="text"></br>
+    <button type="submit">Entrar</button>
+  </form>
+</body>
+</html> -->

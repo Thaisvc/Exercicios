@@ -1,0 +1,57 @@
+body{
+    background-color: rgb(240, 240, 240);
+    font-family: serif;
+    color: black;
+
+}
+.title{
+    color: rgb(66, 137, 165);
+    font-family: monospace;
+    
+  
+}
+
+.header li{
+    list-style: none;
+    display: inline;
+    padding: 20px;
+}
+
+h2{
+    color:  rgb(112, 172, 196);
+    font-family: monospace;
+}
+
+img{
+    width: 500px;
+    height: 300px;
+    border-radius: 55px;
+}
+
+span{
+    font-style: italic;
+    font-size: 20px;
+    text-decoration:  underline ;
+
+}
+
+li{
+list-style: circle;
+}
+
+h3{
+    color: rgb(90, 14, 14);
+}
+
+.links{
+    display: block;
+    color: rgb(138, 138, 16);
+    line-height: 30px;
+    text-decoration: none;
+}
+
+footer{
+    padding: 10px;
+    border: 2px solid white;
+    height: 50px;
+}

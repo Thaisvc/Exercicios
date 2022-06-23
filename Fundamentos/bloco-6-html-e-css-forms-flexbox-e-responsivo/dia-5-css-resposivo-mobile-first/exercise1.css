@@ -1,0 +1,184 @@
+/*
+ * @see http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * apply a natural box layout model to all elements, but allowing components to change
+ */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 15px;
+    padding: 0;
+    font-size: 18px;
+}
+
+article {}
+
+h1 {
+    font-size: 22px;
+
+}
+
+h2 {}
+
+img {
+
+    max-width: 100%;
+}
+
+main {}
+
+section {}
+
+figure {}
+
+figcaption {
+    font-size: .8em;
+}
+
+
+@media screen and (max-width: 800px) {
+    body {
+        background: rgba(65, 65, 66, 0.2);
+        margin: 25px 6%;
+        font-size: 1.5em;
+    }
+
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+    }
+
+    section {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+
+
+
+    }
+
+    figure {
+        display: flex;
+        margin: 0;
+        justify-content: space-evenly;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 165px;
+    }
+
+  
+}
+
+@media screen and (min-width: 800px) {
+    body {
+        background:rgb(153, 152, 152);
+        margin: 25px;
+        font-size: 2em;
+        max-width: 80%;
+    }
+}
+
+/*
+/*
+ * @see http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * apply a natural box layout model to all elements, but allowing components to change
+ */
+/* html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 5px;
+    font-size: 18px;
+}
+
+article {
+    font-size: 14;
+
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+
+}
+
+img {
+    max-width: 100%;
+}
+
+main {
+
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+figure {
+    margin: 0;
+    background: #5c6158;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+
+}
+
+figcaption {
+    font-size: .8em;
+}
+
+@media screen and (min-width: 790){
+    body {
+        background: rgba(21, 21, 159, 0.2);
+        margin: 25px 6%;
+      }
+    
+      figure {
+        width: 45%;
+        margin-right: 4.5%;
+      }
+ }
+ 
+ 
+
+
+
+
+@media screen and (min-width: 1000px){
+   body{
+       background-color: rgba(103, 105, 100, 0.219);
+       font-size: 1.5em;
+       margin: 25px 10%;
+       max-width: 1130px;
+   }
+   figure {
+    width: 30%;
+    margin-right: 2%;
+    text-align: center;
+  }
+}
+
+
+*/

@@ -1,0 +1,76 @@
+<main id="paiDoPai">
+    <section id="pai">
+      <section id="primeiroFilho"></section>
+      <section id="elementoOndeVoceEsta">
+        <section id="primeiroFilhoDoFilho"></section>
+        <section id="segundoEUltimoFilhoDoFilho"></section>
+      </section>
+      Atenção!
+      <section id="terceiroFilho"></section>
+      <section id="quartoEUltimoFilho"></section>
+    </section>
+  </main>
+
+
+ <!--  
+1- Acesse o elemento elementoOndeVoceEsta .
+document.getElementById('elementoOndeVoceEsta')
+
+2- Acesse pai a partir de elementoOndeVoceEsta e adicione uma color a ele.
+document.getElementById('elementoOndeVoceEsta').parentNode.style.color = 'red';
+
+
+3- Acesse o primeiroFilhoDoFilho e adicione um texto a ele. Você se lembra dos vídeos da aula anterior, como fazer isso?
+document.getElementById('pai').children[1].children[0].innerText = 'ate que em fim';
+
+
+4- Acesse o primeiroFilho a partir de pai .
+ document.getElementById('pai').firstElementChild 
+
+
+5- Agora acesse o primeiroFilho a partir de elementoOndeVoceEsta .
+document.getElementById('elementoOndeVoceEsta').previousElementSibling 
+
+
+6- Agora acesse o texto Atenção! a partir de elementoOndeVoceEsta .
+    document.getElementById('elementoOndeVoceEsta').nextSibling 
+" Atenção! "
+
+
+7- Agora acesse o terceiroFilho a partir de elementoOndeVoceEsta .
+document.getElementById('elementoOndeVoceEsta').nextSibling .nextElementSibling 
+
+
+A8- gora acesse o terceiroFilho a partir de pai .
+document.getElementById('pai').childNodes[5]
+
+
+ -->
+<!-- 
+ GABARITO
+ // 1. Acesse o elemento elementoOndeVoceEsta.
+ const elementoOndeVoceEsta = document.getElementById('elementoOndeVoceEsta');
+
+ // 2. Acesse pai a partir de elementoOndeVoceEsta e adicione uma color a ele.
+ const pai = elementoOndeVoceEsta.parentElement;
+ pai.style.color = 'red';
+
+ // 3. Acesse o primeiroFilhoDoFilho e adicione um texto a ele.
+ // Você se lembra dos vídeos da aula anterior, como fazer isso?
+ const primeiroFilhoDoFilho = elementoOndeVoceEsta.firstElementChild;
+ primeiroFilhoDoFilho.innerText = 'primeiroFilhoDoFilho';
+
+ // 4. Acesse o primeiroFilho a partir de pai.
+ const primeiroFilho = pai.firstElementChild;
+
+ // 5. Agora acesse o primeiroFilho a partir de elementoOndeVoceEsta.
+ const primeiroFilho2 = elementoOndeVoceEsta.previousElementSibling;
+ 
+ // 6. Agora acesse o texto Atenção! a partir de elementoOndeVoceEsta.
+ const textElement = elementoOndeVoceEsta.nextSibling;
+
+ // 7. Agora acesse o terceiroFilho a partir de elementoOndeVoceEsta.
+ const terceiroFilho = elementoOndeVoceEsta.nextElementSibling;
+
+ // 8. Agora acesse o terceiroFilho a partir de pai.
+ const terceiroFilho2 = pai.lastElementChild.previousElementSibling; -->
