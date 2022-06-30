@@ -1,6 +1,5 @@
 import React from 'react';
 import ChamaApi from './components/chamaApi';
-import ShowPeople from './components/showPeople';
 
 class App extends React.Component {
   render() {
