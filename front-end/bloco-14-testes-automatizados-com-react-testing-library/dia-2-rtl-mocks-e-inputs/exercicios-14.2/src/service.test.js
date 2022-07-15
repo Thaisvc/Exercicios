@@ -1,5 +1,5 @@
 const service = require('./ service');
-/* 
+
 describe('Testando a services.js', () => {
 
   test('Testa se a função foi chamada, qual seu retorno e quantas vezes foi chamada.', () => {
@@ -45,8 +45,8 @@ describe('testando implementações"', () => {
       expect(service.numAleatorio).toHaveBeenCalledWith(5);
     });
   });
- */
-  describe('A. Faça o mock das funções para com os seguintes casos:', () => {
+ 
+   describe('A. Faça o mock das funções para com os seguintes casos:', () => {
       test('Desenvolva uma nova implementação para a primeira função: agora ela deve retornar a string em caixa baixa.', () => {
         service.caixaAlta = jest.fn().mockImplementation((string) => string.toLowerCase());
         expect(service.caixaAlta('THAIS')).toBe('thais')
@@ -73,4 +73,13 @@ describe('testando implementações"', () => {
 
        
       });
+ 
+      test("restaurando a primeira função e verifica se ela retorna em caixa alta", () => {
+        service.caixaAlta.mockRestore();
+    
+        expect(service.caixaAlta("thais")).toBe("THAIS");
+      })
+
     });
+
+  
