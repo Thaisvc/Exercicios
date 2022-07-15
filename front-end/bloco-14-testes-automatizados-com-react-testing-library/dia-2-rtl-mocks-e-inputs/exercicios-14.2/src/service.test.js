@@ -50,17 +50,27 @@ describe('testando implementações"', () => {
       test('Desenvolva uma nova implementação para a primeira função: agora ela deve retornar a string em caixa baixa.', () => {
         service.caixaAlta = jest.fn().mockImplementation((string) => string.toLowerCase());
         expect(service.caixaAlta('THAIS')).toBe('thais')
+        expect(service.caixaAlta).toHaveBeenCalled()
+        expect(service.caixaAlta).toHaveBeenCalledWith('THAIS')
        
       });
       test('Defina, para a segunda função, uma nova implementação: ela deve retornar a última letra de uma string.', () => {
         service.primeraLetra = jest.fn().mockImplementation((string) => string.charAt(string.length - 1));
         expect(service.primeraLetra('thais')).toBe('s')
+        expect(service.primeraLetra).toHaveBeenCalled()
+        expect(service.primeraLetra).toHaveBeenCalledWith('thais')
+
+
        
       });
 
       test('Implemente, na terceira função: ela deve receber três strings e concatená-las.', () => {
         service.concatena = jest.fn().mockImplementation((a,b,c) => (a.concat(b,c)));
         expect(service.concatena('thais', 'viana', 'cunha')).toBe('thaisvianacunha')
+        expect(service.concatena).toHaveBeenCalled()
+        expect(service.concatena).toHaveBeenCalledWith('thais', 'viana', 'cunha')
+
+
        
       });
     });
