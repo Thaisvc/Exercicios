@@ -1,5 +1,5 @@
 const service = require('./ service');
-
+/* 
 describe('Testando a services.js', () => {
 
   test('Testa se a função foi chamada, qual seu retorno e quantas vezes foi chamada.', () => {
@@ -45,3 +45,22 @@ describe('testando implementações"', () => {
       expect(service.numAleatorio).toHaveBeenCalledWith(5);
     });
   });
+ */
+  describe('A. Faça o mock das funções para com os seguintes casos:', () => {
+      test('Desenvolva uma nova implementação para a primeira função: agora ela deve retornar a string em caixa baixa.', () => {
+        service.caixaAlta = jest.fn().mockImplementation((string) => string.toLowerCase());
+        expect(service.caixaAlta('THAIS')).toBe('thais')
+       
+      });
+      test('Defina, para a segunda função, uma nova implementação: ela deve retornar a última letra de uma string.', () => {
+        service.primeraLetra = jest.fn().mockImplementation((string) => string.charAt(string.length - 1));
+        expect(service.primeraLetra('thais')).toBe('s')
+       
+      });
+
+      test('Implemente, na terceira função: ela deve receber três strings e concatená-las.', () => {
+        service.concatena = jest.fn().mockImplementation((a,b,c) => (a.concat(b,c)));
+        expect(service.concatena('thais', 'viana', 'cunha')).toBe('thaisvianacunha')
+       
+      });
+    });
