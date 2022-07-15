@@ -48,10 +48,13 @@ describe('testando implementações"', () => {
  
    describe('A. Faça o mock das funções para com os seguintes casos:', () => {
       test('Desenvolva uma nova implementação para a primeira função: agora ela deve retornar a string em caixa baixa.', () => {
-        service.caixaAlta = jest.fn().mockImplementation((string) => string.toLowerCase());
-        expect(service.caixaAlta('THAIS')).toBe('thais')
-        expect(service.caixaAlta).toHaveBeenCalled()
-        expect(service.caixaAlta).toHaveBeenCalledWith('THAIS')
+        // https://gabrieluizramos.com.br/fundamentando-mocks-em-javascript
+         // jest.spyOn Esse método recebe como parâmetro o objeto a ser "espionado" e a função a ser verificada, da seguinte maneira:
+        const mockFirstFunction = jest.spyOn(service, "caixaAlta" ).mockImplementation(a => a.toLowerCase());
+
+    expect(mockFirstFunction("UPPERCASE")).toBe("uppercase");
+    expect(service.caixaAlta).toHaveBeenCalledTimes(1);
+    expect(service.caixaAlta).toHaveBeenCalledWith("UPPERCASE");
        
       });
       test('Defina, para a segunda função, uma nova implementação: ela deve retornar a última letra de uma string.', () => {
@@ -75,7 +78,7 @@ describe('testando implementações"', () => {
       });
  
       test("restaurando a primeira função e verifica se ela retorna em caixa alta", () => {
-        service.caixaAlta.mockRestore();
+        service.caixaAlta.mockRestore(); // só funciona quando a simulação foi criada com jest.spyOn
     
         expect(service.caixaAlta("thais")).toBe("THAIS");
       })
