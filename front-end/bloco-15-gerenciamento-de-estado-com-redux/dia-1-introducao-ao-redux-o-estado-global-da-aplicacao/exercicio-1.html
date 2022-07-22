@@ -36,11 +36,13 @@
         <button id="random">Random color</button>
     </div>
     <script>
+        // stado inicial
         const INITIAL_STATE = {
             colors: ['white', 'black', 'red', 'green', 'blue', 'yellow'],
             index: 0,
         };
 
+// funçao q gera uma cor aleatoria
         function criarCor() {
             const oneChar = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
             let cor = '#';
@@ -53,16 +55,19 @@
 
         const reducer = (state = INITIAL_STATE, action) => {
             switch (action.type) {
+                // action NEXT_COLOR
                 case 'NEXT_COLOR':
                     return {
                         ...state,
                         index: state.index === state.colors.length - 1 ? 0 : state.index + 1,
                     };
+                // action PREVIOUS_COLOR
                 case 'PREVIOUS_COLOR':
                     return {
                         ...state,
                         index: state.index === 0 ? state.colors.length - 1 : state.index - 1,
                     };
+                // action RANDOM_COLOR
                 case 'RANDOM_COLOR':
                     return {
                         ...state,
@@ -73,11 +78,15 @@
                     return state;
             }
         };
-
+        // criando a store
         const store = Redux.createStore(reducer);
+
+        // pegando os buttun
         const btnPrevious = document.getElementById('previous');
         const btnRandom = document.getElementById('random');
         const btnNext = document.getElementById('next');
+
+        // adicionando eventos aos buttun 
         btnPrevious.addEventListener('click', () => {
             store.dispatch({
                 type: 'PREVIOUS_COLOR'
@@ -90,17 +99,22 @@
         })
 
         btnRandom.addEventListener('click', () => {
-      store.dispatch({ type: 'RANDOM_COLOR' });
-    });
+            store.dispatch({
+                type: 'RANDOM_COLOR'
+            });
+        });
 
+// subscribe altera a cor de fundo ao clicar em um button
         store.subscribe(() => {
             const {
                 colors,
                 index
             } = store.getState();
+
             document.getElementById('value').innerHTML = colors[index];
             document.getElementById('container').style.backgroundColor = colors[index];
         });
+
         console.log(store.getState());
     </script>
 </body>
