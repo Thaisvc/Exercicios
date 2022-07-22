@@ -166,3 +166,8 @@ describe("testando a requisição", () => {
     expect(service.fetchDog).toHaveBeenCalledTimes(1);
   });
 });
+
+
+
+//------------------------------------------Parte 2-----------------------------
+
