@@ -57,8 +57,6 @@ Correta: A constraint Chave Primária define que os itens da coluna não podem s
 
 
 
-
-
 9. Quanto ao relacionamento Um para Um, analise as opções abaixo:
 
 I. A relação da tabela Livro com a tabela Categoria
@@ -67,7 +65,6 @@ III. A relação da tabela País com a tabela Capital
 IV. A relação da tabela Filme_Ator com as tabelas Ator e Filme
 
 Assinale a alternativa que possui as opções corretas:
-
 ** II, III
 Correta: Essa é a correta porque as 2 opções apresentam relação um pra um, na qual uma linha da tabela A só deve possuir uma linha correspondente na tabela B ou vice-versa.
 
