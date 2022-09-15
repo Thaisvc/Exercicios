@@ -1,0 +1,82 @@
+1. o que é uma API (Application Programming Interface):
+** É a entidade que recebe requisições do Front-End, busca no banco pelos dados necessários e os processa em informações que são retornadas para o Front-End.
+Correta: A API é responsável por processar informações, recebendo requisições, enviando respostas e, por sua vez, alimentando o Front-end.
+
+
+
+
+2. Quanto à constraint UNIQUE no banco de dados SQL, analise as afirmações abaixo e assinale VERDADEIRO (V) ou FALSO (F):
+I. Ela garante que todos os valores de uma coluna sejam diferentes.
+II. As constraints UNIQUE e PRIMARY_KEY possuem comportamento distinto quanto à garantia de valores repetidos na coluna.
+III. Pode haver múltiplas constraints UNIQUE em uma tabela.
+** V, F, V
+V, F, V
+Correta: Item 1 está correto porque a constraint UNIQUE não permite valores repetidos numa determinada coluna da tabela. Item 2 está incorreto porque tanto a constraint UNIQUE quanto PRIMARY_KEY garantem que não existam valores repetidos na coluna. Item 3 está correto porque podemos ter várias constraints UNIQUE em uma tabela.
+
+
+
+
+3. Julia está estudando SQL e precisa listar todos os bancos de dados instalados atualmente.
+Qual das alternativas abaixo possui o comando que executa o que Julia precisa?
+** SHOW DATABASES;
+
+
+
+
+
+4. define um relacionamento Um para Muitos ou Muitos para Um?
+** Uma linha na tabela A pode ter várias linhas correspondentes na tabela B, mas uma linha da tabela B só pode possuir uma linha correspondente na tabela A.
+Correta: Um bom exemplo de seu uso é quando uma categoria pode ter vários livros, porém um livro pode ter apenas uma categoria.
+
+
+
+
+
+5. Defina o que é a linguagem SQL:
+** É uma linguagem usada para criar, pesquisar, extrair e também manipular dados dentro de um banco de dados relacional.
+Correta: SQL é usada para executar comandos em bancos de dados relacionais, isto é, baseado em tabelas.
+
+
+
+
+6. Marque a opção que melhor descreve o que as colunas representam em uma tabela:
+** As colunas descrevem algum aspecto da entidade representada.
+Correta: Nas colunas representamos os aspectos das entidades como por exemplo: nome, sobrenome, email etc.
+
+
+
+
+
+7. O que são contraints em um banco de dados?
+** São regras que ditam exatamente como os dados podem ou não ser inseridos em suas tabelas.
+
+
+8. O que é uma Chave Primária?
+** É uma constraint que define um identificador único e não nulo em uma linha da tabela.
+Correta: A constraint Chave Primária define que os itens da coluna não podem ser repetidos e também não podem ser nulos.
+
+
+
+
+
+9. Quanto ao relacionamento Um para Um, analise as opções abaixo:
+
+I. A relação da tabela Livro com a tabela Categoria
+II. A relação da tabela Pessoa com a tabela RG
+III. A relação da tabela País com a tabela Capital
+IV. A relação da tabela Filme_Ator com as tabelas Ator e Filme
+
+Assinale a alternativa que possui as opções corretas:
+
+** II, III
+Correta: Essa é a correta porque as 2 opções apresentam relação um pra um, na qual uma linha da tabela A só deve possuir uma linha correspondente na tabela B ou vice-versa.
+
+
+
+
+
+
+
+
+
+
