@@ -22,6 +22,33 @@ SELECT  m.title, m.director, m.length_minutes, m.year
  FROM Movies AS m INNER JOIN BoxOffice AS b ON m.id = b.movie_id  WHERE m.theater_id IS NOT NULL  AND b.rating > 8 ;
 
 
+#1 Busque por todas pessoas e todos os pets que estejam associados
+SELECT person.name , pet.name FROM person INNER JOIN pet ON person.id = pet.person_id;
+
+#2. Busque todos os nomes das pessoas que possuem pedidos realizados e as pessoas funcionárias que fizeram a operação
+SELECT person.name , pet.name FROM person INNER JOIN pet ON person.id = pet.person_id;
+
+#Monte uma query que exiba o id do ator, nome do ator e id do filme em que ele já atuou, usando as tabelas actor e film_actor.
+SELECT actor.actor_id, actor.first_name,film_actor.film_id FROM actor
+INNER JOIN film_actor ON actor.actor_id = film_actor.actor_id;
+
+#Use o JOIN para exibir o nome, sobrenome e endereço de cada um dos funcionários do banco. Use as tabelas staff e address. 
+SELECT s.first_name, s.last_name, a.address FROM staff AS s 
+INNER JOIN address AS a ON s.address_id = a.address_id;
+
+#Exiba o id do cliente, nome e email dos primeiros 100 clientes, ordenados pelo nome em ordem decrescente, juntamente com o id do endereço e o nome da rua onde o cliente mora. Essas informações podem ser encontradas nas tabelas customer e address. 
+SELECT c.customer_id, c.first_name, c.email, a.address_id, a.address FROM customer c 
+INNER JOIN address a ON  c.address_id = a.address_id ORDER BY c.first_name DESC LIMIT 100;
+;
+
+
+
+
+
+
+
+
+
 
 
 
