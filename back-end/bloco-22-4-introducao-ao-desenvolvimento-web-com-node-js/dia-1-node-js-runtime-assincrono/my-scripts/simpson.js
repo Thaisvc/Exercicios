@@ -35,13 +35,23 @@ async function filterSimpsons(){
 }
 
 
+async function createSimpsonsFamily(){
+    const fileContent = await fs
+    .readFile('./simpsons.json', 'utf-8');
+    const simpsons = JSON.parse(fileContent); 
+
+    const familyIds = [1 ,2 ,3, 4]; // os ids q quero
+    const simpsonsFamily = simpsons.filter((simpson) => familyIds.includes(Number(simpson.id))); // filtra os ids q quero
+    await fs.writeFile('./simpsonsFamily.json', JSON.stringify(simpsonsFamily)); // escreve o q quero no novo json
+}
 
 
 // A função main é apenas para termos um ponto de entrada centralizado para o nosso script
 async function main() {
     // await readAll();
    // getSimpsonId(3).then((simpson) => console.log(simpson)) //outra forma pode ser usado wait tbm = o readAll
-   filterSimpsons()
+   // filterSimpsons()
+   createSimpsonsFamily();
 };
 
 main();
