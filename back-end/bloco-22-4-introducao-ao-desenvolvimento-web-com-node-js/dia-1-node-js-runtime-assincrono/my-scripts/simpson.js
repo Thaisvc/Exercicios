@@ -56,6 +56,14 @@ async function addNelsonFamily(){
 
 }
 
+async function replaceNelson() {
+    const fileContent = await fs.readFile('./simpsonsFamily.json', 'utf-8');// leitura do arquivo
+    const simpson = JSON.parse(fileContent); // converte modo array
+    const simpsonWithoutNelson = simpson.filter((sinpson) => simpson.id !== '8'); // remove nelson
+    const simpsonWithoutMaggie = simpsonWithoutNelson.concat([{id:'15', name: 'Maggie Simpson '}]) // add maggie no lugar do nelson
+
+    return fs.writeFile('./simpsonsFamily.json', JSON.stringify(simpsonWithoutMaggie));
+};
 
 // A função main é apenas para termos um ponto de entrada centralizado para o nosso script
 async function main() {
@@ -64,6 +72,7 @@ async function main() {
    // filterSimpsons()
    //createSimpsonsFamily();
    //addNelsonFamily()
+   replaceNelson();
 };
 
 main();
