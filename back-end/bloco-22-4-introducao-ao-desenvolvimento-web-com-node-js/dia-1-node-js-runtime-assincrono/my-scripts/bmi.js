@@ -19,9 +19,9 @@ function handleBMI(weight, height) {
  */
 // A função main é o ponto de partida do nosso programa
 /* function main() { */
-const askWeight =  ask.question('What your weight?');
-const askHeight =  ask.question('What your height?');
-const bmi = handleBMI(askWeight, askHeight);
+const askWeight =  ask.questionFloat('What your weight?');
+// const askHeight =  ask.question('What your height?');
+// const bmi = handleBMI(askWeight, askHeight);
 
  /* console.log(`BMI: ${bmi.toFixed(2)}`);
  } 
