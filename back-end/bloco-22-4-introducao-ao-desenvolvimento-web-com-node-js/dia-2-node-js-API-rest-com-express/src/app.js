@@ -17,7 +17,14 @@ app.get('/myActivities/:id', (req, res) => {
 app.get('/myActivities/', (req, res) => {
     res.status(200).json(myActivities);
 });
-
 // GABARITO OUTRA FORMA
 // app.get('/myActivities', (req, res) => res.status(200).json({ activities }));
+
+app.get('/filter/myActivities', (req, res) => {
+    // const { status } = req.query;
+    const exibirFiltro = myActivities.filter(({ status }) => status === req.query.status); 
+    res.status(200).json(exibirFiltro);
+    //  res.status(200).send(` o status é ${status}`);
+});
+
 module.exports = app;
