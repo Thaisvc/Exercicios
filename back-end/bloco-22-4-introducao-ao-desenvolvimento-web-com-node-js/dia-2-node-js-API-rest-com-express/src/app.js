@@ -14,4 +14,10 @@ app.get('/myActivities/:id', (req, res) => {
     res.status(200).json(findId);// vai mostrar responder com id q foi encontrado em findId
 });
 
+app.get('/myActivities/', (req, res) => {
+    res.status(200).json(myActivities);
+});
+
+// GABARITO OUTRA FORMA
+// app.get('/myActivities', (req, res) => res.status(200).json({ activities }));
 module.exports = app;
