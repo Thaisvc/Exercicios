@@ -1,0 +1,1404 @@
+Gabarito: Exercícios - agora, a prática
+🚀 Exercício 1
+Crie testes unitários da camada de model responsável por listar todas as pessoas motoristas cadastradas no banco de dados.
+
+Você deve verificar que:
+
+A função retorna uma estrutura de array;
+
+Retorna a lista de pessoas motoristas com o seguinte formato:
+
+Copiar
+const expected = [
+  {
+    id: 1,
+    name: 'Liana Cisneiros',
+  }, 
+  {
+    id: 2,
+    name: 'Fábio Frazão',
+  },
+];
+De olho na dica 👀: Crie o stub da conexão com o banco de dados.
+
+Crie a camada de model responsável por listar todas as pessoas motoristas.
+Solução
+Parte 1
+Crie testes unitários da camada de model responsável por listar todas as pessoas motoristas cadastradas no banco de dados.
+
+Primeiro passo:
+Agora, crie os diretórios tests/unit/models, crie o arquivo driver.model.test.js e importe as dependências e crie a estrutura inicial com os describes e its.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+describe('Driver Model', function () {
+  describe('Lista todas as pessoas motoristas', function () {
+    it('com o tipo array', function () {
+
+    });
+
+    it('com sucesso', function () {
+
+    });
+  });
+});
+Segundo passo:
+Vamos implementar a primeira fase do TDD que é um teste falhando. Para isso, vamos utilizar o método findAll() que será implementado em um módulo que vamos criar no diretório src/models.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+
+describe('Driver Model', function () {
+  describe('Lista todas as pessoas motoristas', function () {
+    it('com o tipo array', function () {
+      const response = driverModel.findAll();
+    });
+
+    it('com sucesso', function () {
+
+    });
+  });
+});
+Terceiro passo:
+Adicione a asserção verificando se o resultado da implementação é um array.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+
+describe('Driver Model', function () {
+  describe('Lista todas as pessoas motoristas', function () {
+    it('com o tipo array', function () {
+      const response = driverModel.findAll();
+      expect(response).to.be.a('array');
+    });
+
+    it('com sucesso', function () {
+
+    });
+  });
+});
+Quarto passo:
+Rode os testes e você terá que ao executar driverModel.findAll, será disparado um erro de módulo não encontrado. Agora, vamos criar o diretório src/models e criar o arquivo driver.model.js e vamos fazer uma implementação simples para passar nos testes da seguinte forma:
+
+src/models/driver.model.js
+
+Copiar
+const findAll = () => [];
+
+module.exports = {
+  findAll,
+};
+Quinto passo:
+Para facilitar as importações, também criaremos um arquivo index.jsno diretório src/models em que importaremos e exportaremos o model recém criado:
+
+src/models/index.js
+
+Copiar
+const driverModel = require('./driver.model');
+
+module.exports = {
+  driverModel,
+};
+Sexto passo:
+Passou!🎉 Legal, vamos seguir com a segunda verificação, pois vai reforçar nossa implementação anterior. Vamos repetir a chamada do método findAll como resposta esperada da asserção e vamos adicionar como esse array deveria esta retornando populado pelos dados.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+
+describe('Driver Model', function () {
+  describe('Lista todas as pessoas motoristas', function () {
+    it('com o tipo array', function () {
+      const response = driverModel.findAll();
+      expect(response).to.be.a('array');
+    });
+
+    it('com sucesso', function () {
+      const expected = [
+        {
+          id: 1,
+          name: 'Liana Cisneiros',
+        }, 
+        {
+          id: 2,
+          name: 'Fábio Frazão',
+        },
+      ];
+
+      const response = driverModel.findAll();
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+Sétimo passo:
+Rode os testes e estará falhando novamente. Para passar, você vai precisar da implementação na Parte 2. Por tanto, é lá que vamos continuar nossa solução para nos auxiliar na construção da nossa camada de model.
+
+Parte 2
+Crie a camada de model responsável por listar todas as pessoas motoristas.
+
+Primeiro passo:
+Importe o arquivo connection e utilize o método execute para implementar a query responsável por localizar todas as pessoas motoristas cadastradas no banco de dados.
+
+src/models/driver.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+const findAll = async () => {
+  const [result] = await connection.execute(
+  'SELECT * FROM drivers',
+  );
+
+  return result;
+};
+
+module.exports = {
+  findAll,
+};
+Segundo passo:
+Rode os testes e você terá todos eles falhando. Analisando a falha ela ocorreu pelos testes responderem com uma Promise e o esperado é diferente do que implementamos nos testes, por exemplo, aguardamos que o retorno seja um array. Agora, chamamos as funções nos testes sem o async/await, sinal que a Promise não foi tratada, vamos ajustar isso.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+
+describe('Driver Model', function () {
+  describe('Lista todas as pessoas motoristas', function () {
+    it('com o tipo array', async function () {
+      const response = await driverModel.findAll();
+      expect(response).to.be.a('array');
+    });
+
+    it('com sucesso', async function () {
+      const expected = [
+        {
+          id: 1,
+          name: 'Liana Cisneiros',
+        }, 
+        {
+          id: 2,
+          name: 'Fábio Frazão',
+        },
+      ];
+
+      const response = await driverModel.findAll();
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+Terceiro passo:
+Ao rodar os testes novamente, eles falharão com o erro Error: connect ECONNREFUSED 127.0.0.1:33060. Se trata de um erro de conexão com o banco de dados. Ele pode não acontecer caso você esteja com o servidor do MySQL online na sua máquina. Contudo, o ideal é que os testes funcionem independentemente da conexão com o banco ser bem sucedida ou não.
+
+Para isso, utilizaremos o método stub do sinon e indicar para o connection do mysql o que o seu método execute deve retornar em caso de sucesso. Em outras palavras, estamos mockando o retorno desse método. Como isso deve ocorrer antes dos testes, utilizamos before. Importe o sinon e o módulo connection criado por você e implemente da seguinte forma:
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  describe('Lista todas as pessoas motoristas', function () {
+    before(async function () {
+  
+      sinon.stub(connection, 'execute').resolves();
+    });
+
+    it('com o tipo array', async function () {
+      const response = await driverModel.findAll();
+      expect(response).to.be.a('array');
+    });
+
+    it('com sucesso', async function () {
+      const expected = [
+        {
+          id: 1,
+          name: 'Liana Cisneiros',
+        }, 
+        {
+          id: 2,
+          name: 'Fábio Frazão',
+        },
+      ];
+
+      const response = await driverModel.findAll();
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+Quarto passo:
+Agora, no método resolves podemos destacar o que gostaríamos que fosse retornado antes de executar os testes. Nesse caso, desejamos um array com os nomes das pessoas motorista, vamos implementar da seguinte forma:
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  describe('Lista todas as pessoas motoristas', function () {
+    before(async function () {
+      const execute = [{
+          id: 1,
+          name: 'Liana Cisneiros',
+        },
+        {
+          id: 2,
+          name: 'Fábio Frazão',
+        },
+      ];
+  
+      sinon.stub(connection, 'execute').resolves(execute);
+    });
+
+    it('com o tipo array', async function () {
+      const response = await driverModel.findAll();
+      expect(response).to.be.a('array');
+    });
+
+    it('com sucesso', async function () {
+      const expected = [
+        {
+          id: 1,
+          name: 'Liana Cisneiros',
+        }, 
+        {
+          id: 2,
+          name: 'Fábio Frazão',
+        },
+      ];
+
+      const response = await driverModel.findAll();
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+Quinto passo:
+Por fim, precisamos que esse stub não interfira nos outros testes, por tanto vamos utilizar o after para restaurar essa conexão.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  describe('Lista todas as pessoas motoristas', function () {
+    before(async function () {
+      const execute = [{
+          id: 1,
+          name: 'Liana Cisneiros',
+        },
+        {
+          id: 2,
+          name: 'Fábio Frazão',
+        },
+      ];
+  
+      sinon.stub(connection, 'execute').resolves(execute);
+    });
+
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    it('com o tipo array', async function () {
+      const response = await driverModel.findAll();
+      expect(response).to.be.a('array');
+    });
+
+    it('com sucesso', async function () {
+      const expected = [
+        {
+          id: 1,
+          name: 'Liana Cisneiros',
+        }, 
+        {
+          id: 2,
+          name: 'Fábio Frazão',
+        },
+      ];
+
+      const response = await driverModel.findAll();
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+🎉 Parabéns seus testes passaram com sucesso!
+
+🚀 Exercício 2
+Crie testes unitários da camada de model responsável por cadastrar um carro no banco de dados.
+
+Você deve verificar que:
+
+Retorna o id do carro cadastrado com o seguinte formato:
+
+Copiar
+const expected = 1;
+Crie a camada de model responsável por cadastrar um carro.
+Solução
+Parte 1
+Crie testes unitários da camada de model responsável por cadastrar um carro no banco de dados.
+
+Primeiro passo:
+Crie o arquivo car.model.test.js, importe as dependências e crie a estrutura inicial com o describes e its.
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+describe('Car Model', function () {
+  describe('Cadastra um novo carro', function () {
+    it('com sucesso', function () {
+
+    });
+  });
+});
+Segundo passo:
+Vamos implementar a primeira fase do TDD que é um teste falhando. Para isso, vamos utilizar o método insert que será implementado em um módulo que vamos criar no diretório src/models. Adicione o conteúdo que deseja enviar para o banco como um payload.
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+const { carModel } = require('../../../src/models');
+
+describe('Car Model', function () {
+  describe('Cadastra um novo carro', function () {
+    const payload = {
+      model: 'Renault Sandero',
+      color: 'Branco',
+      licensePlate: 'NCA-0956',
+    };
+
+    it('com sucesso', async function () {
+      const response = await carModel.insert(payload);
+    });
+  });
+});
+Terceiro passo:
+Adicione a asserção verificando se o resultado da implementação corresponde ao esperado adicionado na variável expected.
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+const { carModel } = require('../../../src/models');
+
+describe('Car Model', function () {
+  describe('Cadastra um novo carro', function () {
+    const expected = 1;
+
+    const payload = {
+      model: 'Renault Sandero',
+      color: 'Branco',
+      licensePlate: 'NCA-0956',
+    };
+
+    it('com sucesso', async function () {
+      const response = await carModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+Quarto passo:
+Rode os testes e você terá que carModel.insert não é uma função. Para passar, você vai precisar da implementação na Parte 2. Por tanto, é lá que vamos continuar nossa solução para nos auxiliar na construção da nossa camada de model.
+
+Parte 2
+Crie a camada de model responsável por cadastrar um carro.
+
+Primeiro passo:
+Crie o arquivo car.model.js e vamos implementar a query para inserir no banco de dados.
+
+src/models/car.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+const insert = async (car) => {
+  await connection.execute(
+  'INSERT INTO cars (model, color, license_plate) VALUE (?, ?, ?)',
+  [car.model, car.color, car.licensePlate],
+  );
+};
+
+module.exports = {
+  insert,
+};
+Segundo passo:
+Também adicionaremos o novo model ao arquivo index.js:
+
+src/models/index.js
+
+Copiar
+const driverModel = require('./driver.model');
+const carModel = require('./car.model');
+
+module.exports = {
+  driverModel,
+  carModel
+};
+Terceiro passo:
+Agora, vamos desestruturar nosso resultado e retornar o insertId.
+
+src/models/car.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+const insert = async (car) => {
+  const [{ insertId }] = await connection.execute(
+  'INSERT INTO cars (model, color, license_plate) VALUE (?, ?, ?)',
+  [car.model, car.color, car.licensePlate],
+  );
+
+  return insertId;
+};
+
+module.exports = {
+  insert,
+};
+Quarto passo:
+Rodando os testes novamente, talvez eles falhem com o erro Error: connect ECONNREFUSED 127.0.0.1:33060 (como comentado anteriormente). Para resolver, utilizaremos o stub para simular o nosso banco da seguinte forma:
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { carModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Car Model', function () {
+  describe('Cadastra um novo carro', function () {
+    before(async function () {
+      sinon.stub(connection, 'execute').resolves([]);
+    });
+
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    const expected = 1;
+
+    const payload = {
+      model: 'Renault Sandero',
+      color: 'Branco',
+      licensePlate: 'NCA-0956',
+    };
+
+    it('com sucesso', async function () {
+      const response = await carModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+Quinto passo:
+Rode os testes, obterá a falha que não é possível ler a propriedade insertId. Vamos utilizar a variável execute para simular esse retorno que seria o papel do banco de dados. Veja a seguir:
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { carModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Car Model', function () {
+  describe('Cadastra um novo carro', function () {
+    before(async function () {
+      const execute = { insertId: 1 };
+
+      sinon.stub(connection, 'execute').resolves([execute]);
+    });
+
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    const expected = 1;
+
+    const payload = {
+      model: 'Renault Sandero',
+      color: 'Branco',
+      licensePlate: 'NCA-0956',
+    };
+
+    it('com sucesso', async function () {
+      const response = await carModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+🎉 Parabéns seus testes passaram com sucesso!
+
+🚀 Exercício 3
+Crie testes unitários da camada de model responsável por encontrar um carro por meio do id.
+
+Você deve verificar que:
+
+Retorna o carro solicitado pelo id com o seguinte formato:
+
+Copiar
+const expected = {
+  id: 2,
+  model: 'Volkswagen Gol',
+  color: 'Vermelho',
+  licensePlate: 'DZG-4376',
+};
+Crie a camada de model responsável por encontrar um carro por meio do id.
+Solução
+Parte 1
+Crie testes unitários da camada de model responsável por encontrar um carro por meio do id. Observação: os testes anteriores estarão omitidos apenas para facilitar a visualização.
+
+Primeiro passo:
+No arquivo car.model.test.js, adicione mais uma estrutura de describes e its referentes ao recurso que testaremos agora.
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { carModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Car Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Encontra um carro pelo id', function () {
+    it('com sucesso', function () {
+
+    });
+  });
+});
+Segundo passo:
+Vamos implementar a primeira fase do TDD que é um teste falhando. Para isso, vamos utilizar o método findById que será implementado no módulo src/models/car.model.js. Adicione o id que deseja encontrar em um payload.
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { carModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Car Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Encontra um carro pelo id', function () {
+    const payload = 2;
+
+    it('com sucesso', async function () {
+      const response = await carModel.findById(payload);
+    });
+  });
+});
+Terceiro passo:
+Adicione a asserção verificando se o resultado da implementação corresponde ao esperado adicionado na variável expected.
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { carModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Car Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Encontra um carro pelo id', function () {
+    const expected = {
+      id: 2,
+      model: 'Volkswagen Gol',
+      color: 'Vermelho',
+      licensePlate: 'DZG-4376',
+    };
+
+    const payload = 2;
+
+    it('com sucesso', async function () {
+      const response = await carModel.findById(payload);
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+Quarto passo:
+Rode os testes e você terá que carModel.findById não é uma função. Para passar, você vai precisar da implementação na Parte 2. Por tanto, é lá que vamos continuar nossa solução para nos auxiliar na construção da nossa camada de model.
+
+Parte 2
+Crie a camada de model responsável por encontrar um carro por meio do id. Observação: os testes e funções anteriores estarão omitidos apenas para facilitar a visualização.
+
+Primeiro passo:
+No arquivo car.model.js, vamos implementar a query para buscar o id no banco de dados.
+
+src/models/car.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+const insert = async (car) => {
+  const [{ insertId }] = await connection.execute(
+  'INSERT INTO cars (model, color, license_plate) VALUE (?, ?, ?)',
+  [car.model, car.color, car.licensePlate],
+  );
+
+  return insertId;
+};
+
+/* Nova função */
+const findById = async (carId) => {
+  await connection.execute(
+  'SELECT * FROM cars WHERE id = ?',
+  [carId],
+  );
+};
+
+module.exports = {
+  insert,
+  findById,
+};
+Segundo passo:
+Agora, vamos desestruturar nosso resultado e retornar somente o primeiro elemento. Vamos utilizar o camelize para converter os resultados que usarem snake_case.
+
+src/models/car.model.js
+
+Copiar
+/* Importe o módulo camelize */
+const camelize = require('camelize');
+const connection = require('./database/connection');
+
+/* Funções anteriores aqui... */
+
+const findById = async (carId) => {
+  const [[result]] = await connection.execute(
+  'SELECT * FROM cars WHERE id = ?',
+  [carId],
+  );
+
+ return camelize(result);
+};
+
+/* Restante do arquivo... */
+Terceiro passo:
+Rodando os testes novamente, talvez eles falhem com o erro Error: connect ECONNREFUSED 127.0.0.1:33060 (como comentado anteriormente). Para resolver, utilizaremos o stub para simular o nosso banco da seguinte forma:
+
+tests/unit/models/car.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { carModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Car Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Encontra um carro pelo id', function () {
+    before(async function () {
+      const execute = [
+        {
+          id: 2,
+          model: 'Volkswagen Gol',
+          color: 'Vermelho',
+          license_plate: 'DZG-4376',
+        },
+      ];
+  
+      sinon.stub(connection, 'execute').resolves([execute]);
+    });
+  
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    const expected = {
+      id: 2,
+      model: 'Volkswagen Gol',
+      color: 'Vermelho',
+      licensePlate: 'DZG-4376',
+    };
+
+    const payload = 2;
+
+    it('com sucesso', async function () {
+      const response = await carModel.findById(payload);
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+🎉 Parabéns seus testes passaram com sucesso!
+
+🚀 Exercício 4
+Crie testes unitários da camada de model responsável por encontrar uma pessoa motorista por meio do id.
+
+Você deve verificar que:
+
+Retorna a pessoa motorista solicitado pelo id com o seguinte formato:
+
+Copiar
+const expected = {
+  id: 1,
+  name: 'Liana Cisneiros',
+};
+Crie a camada de model responsável por encontrar uma pessoas motorista por meio do id.
+Solução
+Parte 1
+Crie testes unitários da camada de model responsável por encontrar uma pessoa motorista por meio do id. Observação: os testes anteriores estarão omitidos apenas para facilitar a visualização.
+
+Primeiro passo:
+No arquivo driver.model.test.js, adicione mais uma estrutura de describes e its referentes ao recurso que testaremos agora.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Encontra uma pessoa motorista pelo id', function () {
+    it('com sucesso', function () {
+
+    });
+  });
+});
+Segundo passo:
+Vamos implementar a primeira fase do TDD que é um teste falhando. Para isso, vamos utilizar o método findById que será implementado no módulo src/models/driver.model.js. Adicione o id que deseja encontrar em um payload.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Encontra uma pessoa motorista pelo id', function () {
+    const payload = 2;
+
+    it('com sucesso', async function () {
+      const response = await driverModel.findById(payload);
+    });
+  });
+});
+Terceiro passo: Adicione a asserção verificando se o resultado da implementação corresponde ao esperado adicionado na variável expected
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Encontra uma pessoa motorista pelo id', function () {
+    const expected = {
+      id: 2,
+      name: 'Fábio Frazão',
+    };
+
+    const payload = 2;
+
+    it('com sucesso', async function () {
+      const response = await driverModel.findById(payload);
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+Quarto passo:
+Rode os testes e você terá que driverModel.findById não é uma função. Para passar, você vai precisar da implementação na Parte 2. Por tanto, é lá que vamos continuar nossa solução para nos auxiliar na construção da nossa camada de model.
+
+Parte 2
+Crie a camada de model responsável por encontrar uma pessoas motorista por meio do id. Observação: os testes e funções anteriores estarão omitidos apenas para facilitar a visualização.
+
+Primeiro passo:
+No arquivo driver.model.js, vamos implementar a query para buscar o id no banco de dados.
+
+src/models/driver.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+const findAll = async () => {
+  const [result] = await connection.execute(
+  'SELECT * FROM drivers',
+  );
+
+  return result;
+};
+
+/* Nova função */
+const findById = async (driverId) => {
+  await connection.execute(
+  'SELECT * FROM drivers WHERE id = ?',
+  [driverId],
+  );
+};
+
+module.exports = {
+  findAll,
+  findById,
+};
+Segundo passo:
+Agora, vamos desestruturar nosso resultado e retornar somente o primeiro elemento.
+
+src/models/driver.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+/* Funções anteriores aqui... */
+
+const findById = async (driverId) => {
+  const [[result]] = await connection.execute(
+  'SELECT * FROM drivers WHERE id = ?',
+  [driverId],
+  );
+
+  return result;
+};
+
+/* Restante do arquivo... */
+Terceiro passo:
+Rodando os testes novamente, talvez eles falhem com o erro Error: connect ECONNREFUSED 127.0.0.1:33060 (como comentado anteriormente). Para resolver, utilizaremos o stub para simular o nosso banco da seguinte forma:
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Encontra uma pessoa motorista pelo id', function () {
+    before(async function () {
+      const execute = [
+        {
+          id: 2,
+          name: 'Fábio Frazão',
+        },
+      ];
+
+      sinon.stub(connection, 'execute').resolves([execute]);
+    });
+  
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    const expected = {
+      id: 2,
+      name: 'Fábio Frazão',
+    };
+
+    const payload = 2;
+
+    it('com sucesso', async function () {
+      const response = await driverModel.findById(payload);
+
+      expect(response).to.deep.equal(expected);
+    });
+  });
+});
+🎉 Parabéns seus testes passaram com sucesso!
+
+🚀 Exercício 5
+Crie testes unitários da camada de model responsável por cadastrar uma pessoa motorista.
+
+Você deve verificar que:
+
+Retorna a pessoa motorista cadastrada com o seguinte formato:
+
+Copiar
+const expected = 1;
+Crie a camada de model responsável por cadastrar uma pessoa motorista.
+Solução
+Parte 1
+Crie testes unitários da camada de model responsável por criar o relacionamento N:N entre as pessoas motoristas e os carros. Observação: os testes anteriores estarão omitidos apenas para facilitar a visualização.
+
+Primeiro passo:
+No arquivo driver.model.test.js, adicione mais uma estrutura de describes e its referentes ao recurso que testaremos agora.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Cadastra uma pessoa motorista', function () {
+    it('com sucesso', function () {
+    });
+  });
+});
+Segundo passo:
+Vamos implementar a primeira fase do TDD que é um teste falhando. Para isso, vamos utilizar o método insert que será implementado no módulo src/models/driver.model.js. Adicione o conteúdo que deseja enviar para o banco como um payload.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Cadastra uma pessoa motorista', function () {
+    it('com sucesso', async function () {
+      const payload = {
+        name: 'Liana Cisneiros',
+      };
+
+      const response = await driverModel.insert(payload);
+    });
+  });
+});
+Terceiro passo:
+Adicione a asserção verificando se o resultado da implementação corresponde ao esperado adicionado na variável expected.
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Cadastra uma pessoa motorista', function () {
+    it('com sucesso', async function () {
+      const expected = 1;
+
+      const payload = {
+        name: 'Liana Cisneiros',
+      };
+
+      const response = await driverModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+Quarto passo:
+Rode os testes e você terá que driverModel.insert não é uma função. Para passar, você vai precisar da implementação na Parte 2. Por tanto, é lá que vamos continuar nossa solução para nos auxiliar na construção da nossa camada de model.
+
+Parte 2
+Crie a camada de model responsável por cadastrar uma pessoa motorista. Observação: os testes e funções anteriores estarão omitidos apenas para facilitar a visualização.
+
+Primeiro passo:
+No arquivo driver.model.js, vamos implementar a query para inserir no banco de dados.
+
+src/models/driver.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+const findAll = async () => {
+  const [result] = await connection.execute(
+  'SELECT * FROM drivers',
+  );
+
+  return result;
+};
+
+const findById = async (driverId) => {
+  const [[result]] = await connection.execute(
+  'SELECT * FROM drivers WHERE id = ?',
+  [driverId],
+  );
+
+  return result;
+};
+
+/* Nova função */
+const insert = async (driver) => {
+  await connection.execute(
+  'INSERT INTO drivers (name) VALUE (?)',
+  [driver.name],
+  );
+};
+
+module.exports = {
+  findAll,
+  findById,
+  insert,
+};
+Segundo passo:
+Agora, vamos desestruturar nosso resultado e retornar o insertId.
+
+src/models/driver.model.js
+
+Copiar
+/* Funções anteriores aqui... */
+
+const insert = async (driver) => {
+  const [{ insertId }] = await connection.execute(
+  'INSERT INTO drivers (name) VALUE (?)',
+  [driver.name],
+  );
+
+  return insertId;
+};
+
+/* Restante do arquivo... */
+Terceiro passo:
+Rodando os testes novamente, talvez eles falhem com o erro Error: connect ECONNREFUSED 127.0.0.1:33060 (como comentado anteriormente). Para resolver, utilizaremos o stub para simular o nosso banco da seguinte forma:
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Cadastra uma pessoa motorista', function () {
+    before(async function () {
+      sinon.stub(connection, 'execute').resolves([]);
+    });
+  
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    it('com sucesso', async function () {
+      const expected = 1;
+
+      const payload = {
+        name: 'Liana Cisneiros',
+      };
+
+      const response = await driverModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+Quarto passo:
+Rode os testes, obterá a falha que não é possível ler a propriedade insertId. Vamos utilizar a variável execute para simular esse retorno que seria o papel do banco de dados. Veja a seguir:
+
+tests/unit/models/driver.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver Model', function () {
+  /* Testes anteriores aqui... */
+
+  describe('Cadastra uma pessoa motorista', function () {
+    before(async function () {
+      const execute = { insertId: 1 };
+
+      sinon.stub(connection, 'execute').resolves([execute]);
+    });
+  
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    it('com sucesso', async function () {
+      const expected = 1;
+
+      const payload = {
+        name: 'Liana Cisneiros',
+      };
+
+      const response = await driverModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+🎉 Parabéns seus testes passaram com sucesso!
+
+🚀 Exercício 6
+Crie testes unitários da camada de model responsável por criar o relacionamento N:N entre as pessoas motoristas e os carros.
+
+Você deve verificar que:
+
+Retorna o relacionamento entre motorista e carro cadastrado com o seguinte formato:
+
+Copiar
+const expected = 1;
+Crie a camada de model responsável por cadastrar as pessoas motoristas com o relacionamento N:N com os carros cadastrados.
+Solução
+Parte 1
+Crie testes unitários da camada de model responsável por criar o relacionamento N:N entre as pessoas motoristas e os carros.
+
+Primeiro passo:
+Crie o arquivo driver_car.model.test.js, importe as dependências e crie a estrutura inicial com o describes e its.
+
+tests/unit/models/driver_car.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+describe('Driver_Car Model', function () {
+  describe('Cadastra o relacionamento das pessoas motoristas com os carros', function () {
+    it('com sucesso', async function () {
+    });
+  });
+});
+Segundo passo:
+Vamos implementar a primeira fase do TDD que é um teste falhando. Para isso, vamos utilizar o método insert que será implementado em um módulo que vamos criar no diretório src/models. Adicione o conteúdo que deseja enviar para o banco como um payload.
+
+tests/unit/models/driver_car.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+const { driverCarModel } = require('../../../src/models');
+
+describe('Driver_Car Model', function () {
+  describe('Cadastra o relacionamento das pessoas motoristas com os carros', function () {
+    it('com sucesso', async function () {
+      const payload = {
+        driverId: 3,
+        carId: 1,
+      };
+
+      const response = await driverCarModel.insert(payload);
+    });
+  });
+});
+Terceiro passo:
+Adicione a asserção verificando se o resultado da implementação corresponde ao esperado adicionado na variável expected.
+
+tests/unit/models/driver_car.model.test.js
+
+Copiar
+const { expect } = require('chai');
+
+const { driverCarModel } = require('../../../src/models');
+
+describe('Driver_Car Model', function () {
+  describe('Cadastra o relacionamento das pessoas motoristas com os carros', function () {
+    it('com sucesso', async function () {
+      const expected = 1;
+
+      const payload = {
+        driverId: 3,
+        carId: 1,
+      };
+
+      const response = await driverCarModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+Quarto passo:
+Rode os testes e você terá que driverCarModel.insert não é uma função. Para passar, você vai precisar da implementação na Parte 2. Por tanto, é lá que vamos continuar nossa solução para nos auxiliar na construção da nossa camada de model.
+
+Parte 2
+Crie a camada de model responsável por cadastrar as pessoas motoristas com o relacionamento N:N com os carros cadastrados.
+
+Primeiro passo:
+Crie o arquivo driver_car.model.js e vamos implementar a query para inserir no banco de dados.
+
+src/models/driver_car.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+const insert = async (driverCar) => {
+  await connection.execute(
+  'INSERT INTO drivers_cars (driver_id, car_id) VALUE (?, ?)',
+  [driverCar.driverId, driverCar.carId], 
+  );
+};
+
+module.exports = {
+  insert,
+};
+Segundo passo:
+Também adicionaremos o novo model ao arquivo index.js:
+
+src/models/index.js
+
+Copiar
+const driverModel = require('./driver.model');
+const carModel = require('./car.model');
+const driverCarModel = require('./driver_car.model');
+
+module.exports = {
+  driverModel,
+  carModel,
+  driverCarModel,
+};
+Terceiro passo:
+Agora, vamos desestruturar nosso resultado e retornar o insertId.
+
+src/models/driver_car.model.js
+
+Copiar
+const connection = require('./database/connection');
+
+const insert = async (driverCar) => {
+  const [{ insertId }] = await connection.execute(
+  'INSERT INTO drivers_cars (driver_id, car_id) VALUE (?, ?)',
+  [driverCar.driverId, driverCar.carId], 
+  );
+
+  return insertId;
+};
+
+module.exports = {
+  insert,
+};
+Quarto passo:
+Rodando os testes novamente, talvez eles falhem com o erro Error: connect ECONNREFUSED 127.0.0.1:33060 (como comentado anteriormente). Para resolver, utilizaremos o stub para simular o nosso banco da seguinte forma:
+
+tests/unit/models/driver_car.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverCarModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver_Car Model', function () {
+  describe('Cadastra o relacionamento das pessoas motoristas com os carros', function () {
+    before(async function () {
+      sinon.stub(connection, 'execute').resolves([]);
+    });
+  
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    it('com sucesso', async function () {
+      const expected = 1;
+
+      const payload = {
+        driverId: 3,
+        carId: 1,
+      };
+
+      const response = await driverCarModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+Quinto passo:
+Rode os testes, obterá a falha que não é possível ler a propriedade insertId. Vamos utilizar a variável execute para simular esse retorno que seria o papel do banco de dados. Veja a seguir:
+
+tests/unit/models/driver_car.model.test.js
+
+Copiar
+const sinon = require('sinon');
+const { expect } = require('chai');
+
+const { driverCarModel } = require('../../../src/models');
+const connection = require('../../../src/models/database/connection');
+
+describe('Driver_Car Model', function () {
+  describe('Cadastra o relacionamento das pessoas motoristas com os carros', function () {
+    before(async function () {
+      const execute = { insertId: 1 };
+
+      sinon.stub(connection, 'execute').resolves([execute]);
+    });
+  
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    it('com sucesso', async function () {
+      const expected = 1;
+
+      const payload = {
+        driverId: 3,
+        carId: 1,
+      };
+
+      const response = await driverCarModel.insert(payload);
+
+      expect(response).to.equal(expected);
+    });
+  });
+});
+🎉 Parabéns seus testes passaram com sucesso!
