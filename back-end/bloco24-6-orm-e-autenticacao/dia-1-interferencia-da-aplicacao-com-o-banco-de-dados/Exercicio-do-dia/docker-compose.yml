@@ -1,0 +1,9 @@
+version: '3.1'
+services:
+ mysql:
+  image: mysql:8.0.23
+  container_name: exercicio-6-1
+  environment: 
+   - MYSQL_ROOT_PASSWORD=root
+  ports: 
+   - 33065:3306
