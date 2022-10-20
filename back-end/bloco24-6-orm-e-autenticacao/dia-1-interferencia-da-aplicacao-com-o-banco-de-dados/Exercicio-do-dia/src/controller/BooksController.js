@@ -10,6 +10,15 @@ const getAll = async (req, res) => {
     };
 };
 
+const getId = async (req,res) => {
+    const book = await BooksService.getById(req.params.id);
+    if(!book){
+        return res.status(404).json({message: ' book not found'});
+    }
+    return res.status(200).json(book);
+}
+
 module.exports = {
     getAll,
+    getId,
 }

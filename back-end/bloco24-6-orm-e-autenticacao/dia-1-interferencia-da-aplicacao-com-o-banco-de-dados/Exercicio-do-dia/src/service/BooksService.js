@@ -7,7 +7,7 @@ return books;
 
 
 const getById = async (idBook) => {
-const bookID = await Book.findByPk(idBook);
+const bookID = await Book.getAll(idBook);
 return bookID;
 };
 
