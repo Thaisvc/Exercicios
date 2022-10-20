@@ -18,6 +18,17 @@ const getId = async (req,res) => {
     return res.status(200).json(book);
 }
 
+const addNewBook = async (req, res) => {
+    try {
+        const bookAdd = await BooksService.addBook(req.body);
+        return res.status(200).json(bookAdd);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: 'ocorreu um erro'});
+    };
+    
+};
+
 module.exports = {
     getAll,
     getId,
