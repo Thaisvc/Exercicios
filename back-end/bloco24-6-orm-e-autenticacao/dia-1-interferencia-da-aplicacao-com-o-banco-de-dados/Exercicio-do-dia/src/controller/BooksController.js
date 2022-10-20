@@ -32,4 +32,5 @@ const addNewBook = async (req, res) => {
 module.exports = {
     getAll,
     getId,
+    addNewBook,
 }
