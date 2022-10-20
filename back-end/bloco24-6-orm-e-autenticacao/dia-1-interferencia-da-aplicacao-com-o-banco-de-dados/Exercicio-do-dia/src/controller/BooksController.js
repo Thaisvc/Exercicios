@@ -1,4 +1,4 @@
-const BooksService = require('../service/BooksService');
+ const BooksService = require('../service/BooksService');
 
 const getAll = async (req, res) => {
     try {
@@ -19,9 +19,10 @@ const getId = async (req,res) => {
 }
 
 const addNewBook = async (req, res) => {
+    const { title, author, pageQuantity } = req.body;
     try {
-        const bookAdd = await BooksService.addBook(req.body);
-        return res.status(200).json(bookAdd);
+        const bookAdd = await BooksService.addBook( { title, author, pageQuantity });
+        return res.status(201).json(bookAdd);
     } catch (error) {
         console.log(error);
         res.status(500).json({message: 'ocorreu um erro'});
@@ -33,4 +34,4 @@ module.exports = {
     getAll,
     getId,
     addNewBook,
-}
+} 

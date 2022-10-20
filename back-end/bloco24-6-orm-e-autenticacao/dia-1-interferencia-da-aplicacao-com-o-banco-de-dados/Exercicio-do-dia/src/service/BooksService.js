@@ -12,7 +12,7 @@ return bookID;
 };
 
 const addBook = async ({title, author, pageQuantity}) => {
-const newBook = await Book.create(title, author, pageQuantity);
+const newBook = await Book.create({title, author, pageQuantity});
 return newBook;
 };
 
