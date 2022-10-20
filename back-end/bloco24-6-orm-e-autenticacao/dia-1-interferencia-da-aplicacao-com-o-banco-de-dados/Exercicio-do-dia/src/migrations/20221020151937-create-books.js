@@ -50,7 +50,7 @@ module.exports = {
 
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface, _Sequelize) {
     /**
      *  Agora vamos implementar o bloco de reversão (down) com um código que vai apenas apagar a 
      * tabela caso seja necessário desfazer a operação de execução (up). Assim escreveremos uma 
