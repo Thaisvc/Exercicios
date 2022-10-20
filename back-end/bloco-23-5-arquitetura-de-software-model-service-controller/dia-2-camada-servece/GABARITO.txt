@@ -1,0 +1,1320 @@
+Gabarito: Exercícios - agora, a prática
+Exercício 1 - Listar as pessoas motoristas (service)
+Crie uma função na camada Service que lista as pessoas motoristas em nosso app.
+
+Sobre a função
+
+A função deve:
+
+Se chamar getDrivers;
+Usar a camada Model para receber a lista de motoristas;
+Retornar um objeto no mesmo padrão que as outras funções da nossa camada Service.
+Exemplo de resposta bem sucedida
+
+Copiar
+{
+  type: null,
+  message: [
+    { id: 1, name: 'Liana Cisneiros' },
+    { id: 2, name: 'Fábio Frazão' },
+    { id: 3, name: 'Anastacia Bicalho' },
+    { id: 4, name: 'Samara Granjeiro' },
+    { id: 5, name: 'Levi Teixeira' },
+  ],
+}
+Parte 1.1: Crie testes unitários para a função getDrivers
+Cenários de teste
+
+Listando as pessoas motoristas
+a lista de motoristas é um array
+retorna a lista de motoristas com sucesso
+Parte 1.2: Implemente a função getDrivers na camada Service
+Chame as funções da camada Model conforme a necessidade
+Confirme que a função passa nos testes
+Parte 1.3: Crie stubs para isolar os testes
+Use stubs da função da camada Model para isolar seus testes
+Confirme que mesmo sem um banco de dados rodando os testes funcionam corretamente
+Solução
+Lembre-se que os exercícios servem para consolidar o seu aprendizado e te ajudar a identificar as suas dúvidas! Portanto, é esperado que você trave em algum momento. Somente olhe o gabarito depois de tentar resolver o problema por algum tempo!
+
+Garanta que você entendeu tudo que está aqui, explique para “a parede” para ter certeza e, se houver dificuldade, tire sua dúvida conosco!
+
+No final está o código finalizado do gabarito. Abaixo um passo-a-passo de uma sugestão de resolução dos exercícios.
+
+Exercício 1 - Listar as pessoas motoristas (service)
+Parte 1.1: Crie testes unitários para a função getDrivers
+Começamos criando todos os describes e descrições dos its para cada um dos cenários de testes
+Copiar
+// tests/unit/services/driver-exercises.service.test.js
+describe('Verificando service Driver - Exercícios', function () {
+  describe('Listando as pessoas motoristas', function () {
+    // TODO: ARRANGE - criar stubs para a camada Model
+
+    it('a lista de motoristas é um array', async function () {
+      // TODO: ACT - chamar a função `getDrivers`
+      // TODO: ASSERT - verificar se resultado é um array
+    });
+
+    it('retorna a lista de motoristas com sucesso', async function () {
+      // TODO: ACT - chamar a função `getDrivers`
+      // TODO: ASSERT - verificar se resultado é a lista de motoristas
+    });
+  });
+});
+Criamos um mock da lista de motoristas na pasta mocks
+Copiar
+// tests/unit/services/mocks/driver-exercises.service.mock.js
+const driverList = [
+  { id: 1, name: 'Liana Cisneiros' },
+  { id: 2, name: 'Fábio Frazão' },
+  { id: 3, name: 'Anastacia Bicalho' },
+  { id: 4, name: 'Samara Granjeiro' },
+  { id: 5, name: 'Levi Teixeira' },
+];
+
+module.exports = {
+  driverList,
+};
+Criamos uma função vazia na camada Service
+Copiar
+// src/services/driver.service.js
+// ...
+
+const getDrivers = async () => {
+  // TODO: puxar motoristas do model
+  // TODO: retornar objeto padronizado
+};
+
+// module.exports = {
+//   getWaitingDriverTravels,
+//   travelAssign,
+//   startTravel,
+//   endTravel,
+     getDrivers,
+// };
+No teste, importamos a função, o mock da lista, fazemos o Act e o Assert.
+Copiar
+// tests/unit/services/driver-exercises.service.test.js
+const { expect } = require('chai');
+const { driverService } = require('../../../src/services');
+const { driverList } = require('./mocks/driver-exercises.service.mock');
+
+// describe('Verificando service Driver - Exercícios', function () {
+//   describe('Listando as pessoas motoristas', function () {
+//     // TODO: ARRANGE - criar stubs para a camada Model
+// 
+//     it('a lista de motoristas é um array', async function () {
+         const travel = await driverService.getDrivers();
+       
+         expect(travel.message instanceof Array).to.equal(true);
+//     });
+// 
+//     it('retorna a lista de motoristas com sucesso', async function () {
+         const travel = await driverService.getDrivers();
+ 
+         expect(travel.message).to.deep.equal(driverList);
+//     });
+//   });
+// });
+Como nesse caso não temos nenhuma entrada, a parte Arrange virá nos stubs que trabalharemos mais tarde
+Nesse momento, nossos testes estão falhando, mas não por muito tempo!
+Parte 1.2: Implemente a função getDrivers na camada Service
+Chamamos a camada Model para receber a lista de pessoas motoristas
+Copiar
+// src/services/driver.service.js
+// const {
+//   travelModel,
+     driverModel,
+// } = require('../models');
+
+// ...
+
+// const getDrivers = async () => {
+     const drivers = await driverModel.findAll();
+     return { type: null, message: drivers };
+// };
+
+// ...
+Retornamos um objeto com type sendo null, indicando que deu tudo certo e message sendo a lista
+Os testes agora estão quase passando, (podem ter mais ou menos registros na DB, por exemplo), pois ainda dependem da DB para funcionarem. 🤔
+Parte 1.3: Crie stubs para isolar os testes
+Finalmente criamos um stub simulando a função da camada Model, isolando nossos testes! 👍
+Copiar
+// tests/unit/services/driver-exercises.service.test.js
+// const { expect } = require('chai');
+const sinon = require('sinon');
+
+const { driverModel } = require('../../../src/models');
+// const { driverService } = require('../../../src/services');
+// const { driverList } = require('./mocks/driver-exercises.service.mock');
+
+// describe('Verificando service Driver - Exercícios', function () {
+//   describe('Listando as pessoas motoristas', function () {
+        beforeEach(function () {
+          sinon.stub(driverModel, 'findAll').resolves(driverList);
+        });
+
+        afterEach(function () {
+          sinon.restore();
+        });
+
+//     it('a lista de motoristas é um array', async function () {
+// ...
+Exercício 2 - Cadastrar um carro (service)
+Crie uma função na camada Service que cadastra um carro em nosso app.
+
+A função deve:
+
+Se chamar createCar;
+Receber o modelo, cor e placa do novo carro;
+Retornar um objeto de erro caso algum dado não seja recebido ou seja inválido;
+Usar a camada Model para cadastrar um novo carro no banco de dados;
+Retornar um objeto no mesmo padrão que as outras funções da nossa camada Service;
+Parâmetros a serem recebidos
+
+model: string com pelo menos 3 caracteres ex: "Ford Ka"
+color: string com pelo menos 2 caracteres ex.: "Azul"
+licensePlate: string com exatamente 7 caracteres ex.: "ABC1D2E"
+Exemplo de resposta bem sucedida
+
+Copiar
+{
+  type: null,
+  message: {
+    id: 1,
+    model: 'Chevrolet Monza',
+    color: 'Branco',
+    licensePlate: 'ABC1A2B',
+  },
+}
+Exemplo de resposta de erro
+
+Copiar
+{
+  type: 'INVALID_VALUE',
+  message: '"model" length must be at least 3 characters long',
+}
+Parte 2.1: Crie testes unitários para a função createCar
+Cenários de teste
+
+Tentando cadastrar um novo carro com erros semânticos
+retorna um erro ao receber um modelo inválido
+retorna um erro ao receber uma cor inválida
+retorna um erro ao receber uma placa inválida
+Cadastrando um novo carro com sucesso
+não retorna erros
+retorna o carro cadastrado
+Parte 2.2: Implemente a função createCar na camada Service
+Crie um schema do Joi e uma função de validação para validar os dados de um novo carro
+Chame as funções da camada Model conforme a necessidade
+Confirme que a função passa nos testes
+Parte 2.3: Crie stubs para isolar os testes
+Use stubs da função da camada Model para isolar seus testes
+Confirme que mesmo sem um banco de dados rodando os testes funcionam corretamente
+Solução
+Exercício 2 - Cadastrar um carro (service)
+Parte 2.1: Crie testes unitários para a função createCar
+Começamos criando todos os describes e descrições dos its para cada um dos cenários de testes
+Como vamos checar valores várias vezes nos testes, criamos algumas variáveis globais com valores válidos e inválidos
+Copiar
+// tests/unit/services/car-exercises.service.test.js
+const validModel = 'Chevrolet Monza';
+const validColor = 'Branco';
+const validPlate = 'ABC1A2B';
+const invalidValue = '9';
+
+describe('Verificando service Car', function () {
+  describe('Tentando cadastrar um novo carro com erros semânticos', function () {     
+    it('retorna um erro ao receber um modelo inválido', async function () {});
+    it('retorna um erro ao receber uma cor inválida', async function () {});
+    it('retorna um erro ao receber uma placa inválida', async function () {});
+  });
+    
+  describe('Cadastrando um novo carro com sucesso', function () {    
+    it('não retorna erros', async function () {});
+    it('retorna o carro cadastrado', async function () {});
+  });
+});
+Criamos um mock de um carro criado na pasta mocks
+Copiar
+// tests/unit/services/mocks/car-exercises.service.mock.js
+const createdCar = {
+  id: 1,
+  model: 'Chevrolet Monza',
+  color: 'Branco',
+  licensePlate: 'ABC1A2B',
+};
+
+module.exports = {
+  createdCar,
+};
+Criamos uma função vazia na camada Service
+Copiar
+// src/services/car.service.js
+const createCar = async (model, color, licensePlate) => {};
+
+module.exports = {
+  createCar,
+};
+Como criamos um novo módulo, temos que colocá-lo no index.js para simplificar a importação
+Copiar
+// src/services/index.js
+   const carService = require('./car.service');
+// const driverService = require('./driver.service');
+// const passengerService = require('./passenger.service');
+// 
+// module.exports = {
+     carService,
+//   driverService,
+//   passengerService,
+// };
+No teste, importamos a função, o mock da lista, fazemos o Act e o Assert nos testes
+💡Dica: as mensagens aqui já são as retornadas pelo Joi, mas como estamos usando TDD podemos começar com qualquer valor e depois de implementar as validações podemos corrigi-las para as corretas.
+
+Copiar
+// tests/unit/services/car-exercises.service.test.js
+const { expect } = require('chai');
+
+const { carService } = require('../../../src/services');
+const { createdCar } = require('./mocks/car-exercises.service.mock');
+
+// ...
+
+// describe('Verificando service Car', function () {
+//   describe('Tentando cadastrar um novo carro com erros semânticos', function () {     
+//     it('retorna um erro ao receber um modelo inválido', async function () {
+         const response = await carService.createCar(invalidValue, validColor, validPlate);
+        
+         expect(response.type).to.equal('INVALID_VALUE');
+         expect(response.message).to.equal('"model" length must be at least 3 characters long');
+//     });
+      
+//     it('retorna um erro ao receber uma cor inválida', async function () {
+         const response = await carService.createCar(validModel, invalidValue, validPlate);
+        
+         expect(response.type).to.equal('INVALID_VALUE');
+         expect(response.message).to.equal('"color" length must be at least 2 characters long');
+//     });
+        
+//     it('retorna um erro ao receber uma placa inválida', async function () {
+         const response = await carService.createCar(validModel, validColor, invalidValue);
+        
+         expect(response.type).to.equal('INVALID_VALUE');
+         expect(response.message).to.equal('"licensePlate" length must be 7 characters long');
+//     });
+//   });
+    
+//   describe('Cadastrando um novo carro com sucesso', function () {      
+//     it('não retorna erros', async function () {
+         const response = await carService.createCar(validModel, validColor, validPlate);
+      
+         expect(response.type).to.equal(null);
+//     });
+    
+//     it('retorna o carro cadastrado', async function () {
+         const response = await carService.createCar(validModel, validColor, validPlate);
+      
+         expect(response.message).to.equal(createdCar);
+//     });
+//   });
+// });
+Nossos testes estão falhando ❌, por enquanto!
+Parte 2.2: Implemente a função createCar na camada Service
+Adicionamos um schema do Joi e uma função de validação para validar dados de um novo carro
+Copiar
+// src/services/validations/schemas-exercises.js
+const Joi = require('joi');
+
+const addCarSchema = Joi.object({
+  model: Joi.string().min(3).required(),
+  color: Joi.string().min(2).required(),
+  licensePlate: Joi.string().length(7).required(),
+});
+
+module.exports = {
+  addCarSchema,
+};
+Copiar
+// src/services/validations/validations-exercises.js
+const {
+  addCarSchema,
+} = require('./schemas-exercises');
+
+const validateNewCar = (model, color, licensePlate) => {
+  const { error } = addCarSchema
+    .validate({ model, color, licensePlate });
+ 
+  if (error) return { type: 'INVALID_VALUE', message: error.message };
+  return { type: null, message: '' };
+};
+
+module.exports = {
+  validateNewCar,
+};
+Adicionamos a etapa de validação em nossa função principal
+Chamamos a camada Model para cadastrar nosso carro caso esteja tudo certo
+Retornamos um objeto com type sendo null, indicando que deu tudo certo e message sendo o novo carro criado
+Copiar
+// src/services/car.service.js
+const { validateNewCar } = require('./validations/validations-exercises');
+const { carModel } = require('../models');
+
+// const createCar = async (model, color, licensePlate) => {
+     const error = validateNewCar(model, color, licensePlate);
+     if (error.type) return error;
+
+     const newCar = await carModel.insert({ model, color, licensePlate });
+     return { type: null, message: newCar };
+// };
+
+// ...
+Os testes agora estão quase passando, (podem aparecer diferenças na chave id no resultado, por exemplo), pois ainda estão dependendo do banco de dados! 😱
+Parte 2.3: Crie stubs para isolar os testes
+Voltando nos testes, criamos um stub simulando a função da camada Model, e com isso isolamos nossos testes! 👍
+Só precisamos criar stubs para os testes que deveriam chamar a camada de Model
+Copiar
+// tests/unit/services/car-exercises.service.test.js
+// const { expect } = require('chai');
+const sinon = require('sinon');
+
+const carModel = require('../../../src/models/car.model');
+// ...
+
+// describe('Cadastrando um novo carro com sucesso', function () {
+    afterEach(function () {
+      sinon.restore();
+    });
+
+    beforeEach(function () {
+      sinon.stub(carModel, 'insert').resolves(createdCar);
+    });
+
+//  it('não retorna erros', async function () {
+// ...
+🚀 Exercício 3 - Cadastrar uma pessoa motorista (service)
+Crie uma função na camada Service que cadastra uma pessoa motorista em nosso app.
+
+A função deve:
+
+Se chamar createDriver;
+Receber o nome da pessoa motorista;
+Receber opcionalmente um array de ids de carros já cadastrados em nossa base de dados;
+Retornar um objeto de erro caso o nome não seja recebido ou seja inválido;
+Retornar um objeto de erro caso o array de carros seja inválido ex.: algum carro não exista;
+Usar a camada Model para cadastrar a pessoa motorista no banco de dados;
+Vincular os carros do array de ids (caso seja passada) à pessoa motorista;
+Retornar um objeto no mesmo padrão que as outras funções da nossa camada Service,
+A lista de carros vinculados à pessoa motorista deve ser retornada junto com as outras informações da pessoa motorista.
+Parâmetros a serem recebidos
+
+name: string com pelo menos 3 caracteres ex: "Gena"
+carIds: array com os ids dos carros a serem vinculados com a pessoa motorista (opcional)
+Exemplo de resposta bem sucedida
+
+Copiar
+{
+  type: null,
+  message: {
+    id: 1,
+    name: 'Gus',
+    cars: [
+      {
+        color: 'Branco',
+        id: 1,
+        licensePlate: 'NCA-0956',
+        model: 'Renault Sandero',
+      },
+      {
+        color: 'Vermelho',
+        id: 2,
+        licensePlate: 'DZG-4376',
+        model: 'Volkswagen Gol',
+      },
+    ],
+  }
+}
+Exemplo de resposta de erro
+
+Copiar
+{
+  type: 'CAR_NOT_FOUND',
+  message: 'Some car is not found',
+}
+🚀 Parte 3.1: Crie testes unitários para a função createDriver
+Cenários de teste
+
+Tentando cadastrar uma nova pessoa motorista com erros semânticos
+retorna um erro ao receber um nome inválido
+retorna um erro ao receber uma lista de carros inválida
+Tentando cadastrar uma nova pessoa motorista com erros de id
+retorna o erro “CAR_NOT_FOUND”
+retorna a mensagem “Some car is not found”
+Cadastrando uma nova pessoa motorista com sucesso sem carros
+retorna a pessoa motorista cadastrada
+não retorna erro
+Cadastrando uma nova pessoa motorista com sucesso com carros
+retorna os carros vinculados à pessoa motorista
+não retorna erro
+🚀 Parte 3.2: Implemente a função createDriver na camada Service
+Confirme que a função passa nos testes
+🚀 Parte 3.3: Crie stubs para isolar os testes
+Use stubs da função da camada Model para isolar seus testes
+Confirme que mesmo sem um banco de dados rodando os testes funcionam corretamente
+Solução
+🚀 Exercício 3 - Cadastrar uma pessoa motorista (service)
+🚀 Parte 3.1: Crie testes unitários para a função createDriver
+Colocamos os describes e descrições dos its para cada um dos cenários de testes
+Criamos algumas variáveis globais com valores válidos e inválidos
+Copiar
+// tests/unit/services/driver-exercises.service.test.js
+// ...
+
+const validDriverName = 'Gus';
+const invalidValue = '1';
+
+// describe('Verificando service Driver - Exercícios', function () {
+  // ...
+  describe('Tentando cadastrar uma nova pessoa motorista com erros semânticos', function () {
+    it('retorna um erro ao receber um nome inválido', async function () {});
+    it('retorna um erro ao receber uma lista de carros inválida', async function () {});
+  });
+
+  describe('Tentando cadastrar uma nova pessoa motorista com erros de id', function () {
+    it('retorna o erro "CAR_NOT_FOUND"', async function () {});
+    it('retorna a mensagem "Some car is not found"', async function () {});
+  });
+
+  describe('Cadastrando uma nova pessoa motorista com sucesso sem carros', function () {
+    it('retorna a pessoa motorista cadastrada', async function () {});
+    it('não retorna erro', async function () {});
+  });
+
+  describe('Cadastrando uma nova pessoa motorista com sucesso com carros', function () {
+    it('retorna os carros vinculados à pessoa motorista', async function () {});
+    it('não retorna erro', async function () {});
+  });
+// ...
+Adicionamos mocks para uma pessoa motorista no arquivo de mocks
+Como a pessoa motorista pode ou não ter uma lista de carros relacionada a ela, criamos mocks para as duas situações
+Copiar
+// tests/unit/services/mocks/driver-exercises.service.mock.js
+// ...
+
+// essas informações se repetem nos outros mocks e são exatamente
+// o que a camada Model retorna, sendo útil para criarmos stubs!
+const createdDriver = { id: 1, name: 'Gus' };
+
+const createdDriverWithoutCars = {
+  ...createdDriver,
+  cars: [],
+};
+
+const createdDriverWithCars = {
+  ...createdDriver,
+  cars: [
+    {
+      color: 'Branco',
+      id: 1,
+      licensePlate: 'NCA-0956',
+      model: 'Renault Sandero',
+    },
+    {
+      color: 'Vermelho',
+      id: 2,
+      licensePlate: 'DZG-4376',
+      model: 'Volkswagen Gol',
+    },
+  ],
+};
+
+// module.exports = {
+//   driverList,
+     createdDriver,
+     createdDriverWithCars,
+     createdDriverWithoutCars,
+// };
+Criamos uma função vazia na camada Service
+Copiar
+// src/services/driver.service.js
+// ...
+
+const createDriver = async (name, carIds) => {
+  // TODO: validar dados recebidos
+  // TODO: cadastrar pessoa motorista
+  // TODO: se houver a array `carIds`, vincular à pessoa motorista
+  // TODO: retornar os dados da pessoa motorista
+};
+
+// module.exports = {
+//   ...
+     createDriver,
+// };
+No teste, importamos os mocks e preenchemos os testes
+Copiar
+// tests/unit/services/driver-exercises.service.test.js
+// ...
+
+// const {
+//   driverList,
+     createdDriverWithoutCars,
+     createdDriverWithCars,
+// } = require('./mocks/driver-exercises.service.mock');
+
+// ...
+
+//   describe('Tentando cadastrar uma nova pessoa motorista com erros semânticos', function () {
+//     it('retorna um erro ao receber um nome inválido', async function () {
+         const response = await driverService.createDriver(invalidValue);
+
+         expect(response.type).to.equal('INVALID_VALUE');
+         expect(response.message).to.equal(
+           '"name" length must be at least 3 characters long',
+         );
+//     });
+//     it('retorna um erro ao receber uma lista de carros inválida', async function () {
+         const response = await driverService.createDriver(
+           validDriverName,
+           invalidValue,
+         );
+
+         expect(response.type).to.equal('INVALID_VALUE');
+         expect(response.message).to.equal('"carIds" must be an array');
+//     });
+//   });
+
+//   describe('Tentando cadastrar uma nova pessoa motorista com erros de id', function () {
+//     it('retorna o erro "CAR_NOT_FOUND"', async function () {
+         const response = await driverService.createDriver(validDriverName, [999]);
+
+         expect(response.type).to.equal('CAR_NOT_FOUND');
+//     });
+    
+//     it('retorna a mensagem "Some car is not found"', async function () {
+         const response = await driverService.createDriver(validDriverName, [999]);
+
+         expect(response.message).to.equal('Some car is not found');
+//     });
+//   });
+
+//   describe('Cadastrando uma nova pessoa motorista com sucesso sem carros', function () {
+//     it('retorna a pessoa motorista cadastrada', async function () {
+         const response = await driverService.createDriver(validDriverName);
+      
+         expect(response.message).to.deep.equal(createdDriverWithoutCars);
+//     });
+
+//     it('não retorna erro', async function () {
+         const response = await driverService.createDriver(validDriverName);
+      
+         expect(response.type).to.equal(null);
+//     });
+//   });
+
+//   describe('Cadastrando uma nova pessoa motorista com sucesso com carros', function () {
+//     it('retorna os carros vinculados à pessoa motorista', async function () {
+         const response = await driverService.createDriver(
+           validDriverName,
+           [1, 2],
+         );
+
+         expect(response.type).to.equal(null);
+         expect(response.message).to.deep.equal(createdDriverWithCars);
+//     });
+
+//     it('não retorna erro', async function () {
+         const response = await driverService.createDriver(
+           validDriverName,
+           [1, 2],
+         );
+
+         expect(response.type).to.equal(null);
+//     });
+//   });
+// ...
+Nossos testes estão falhando ❌, mas ainda não acabou!
+🚀 Parte 3.2: Implemente a função createDriver na camada Service
+Adicionamos um schema e a uma função para validar dados para uma nova pessoa motorista
+Copiar
+// src/services/validations/schemas-exercises.js
+// ...
+
+// aqui reaproveitamos um dos schemas que vimos no conteúdo
+const { idSchema } = require('./schemas');
+
+// ...
+
+const addDriverSchema = Joi.object({
+  name: Joi.string().min(3).required(),
+  carIds: Joi.array().items(idSchema),
+});
+
+// module.exports = {
+//   addCarSchema,
+     addDriverSchema,
+// };
+Copiar
+// src/services/validations/validations-exercises.js
+const { carModel } = require('../../models');
+// const {
+//   addCarSchema,
+     addDriverSchema,
+// } = require('./schemas-exercises');
+
+// ...
+
+const validateNewDriver = async (name, carIds) => {
+  const { error } = addDriverSchema
+    .validate({ name, carIds });
+  if (error) return { type: 'INVALID_VALUE', message: error.message };
+
+  if (carIds) {
+    // chamamos `carModel.findById` em cada um dos ids para buscar os carros na DB
+    // quando um carro não existe, sua Promise retorna `undefined`
+    // `Promise.all` aguarda todas as Promises retornarem
+    // e retorna a array de resultados para `cars`
+    const cars = await Promise.all(
+      carIds.map(async (carId) => carModel.findById(carId)),
+    );
+
+    const someCarIsMissing = cars.some((car) => car === undefined);
+    if (someCarIsMissing) return { type: 'CAR_NOT_FOUND', message: 'Some car is not found' };
+  }
+
+  return { type: null, message: '' };
+};
+
+// module.exports = {
+//   validateNewCar,
+     validateNewDriver,
+// };
+Adicionamos a etapa de validação em nossa função principal
+Chamamos a camada Model para cadastrar a pessoa motorista
+Copiar
+// src/services/driver.service.js
+// const {
+//   ...
+     driverCarModel,
+     carModel,
+// } = require('../models');
+
+const { validateNewDriver } = require('./validations/validations-exercises');
+// ...
+
+// const createDriver = async (name, carIds) => {
+     // Validando dados recebidos
+     const error = await validateNewDriver(name, carIds);
+     if (error.type) return error;
+
+     // Cadastrando pessoa motorista
+     const driverId = await driverModel.insert({ name });
+     
+     // Pegando a pessoa motorista cadastrada na DB
+     const newDriver = await driverModel.findById(driverId);
+    
+     // Se houver a lista de ids de carros, criamos os relacionamentos
+     // e adicionamos a lista ao resultado final,
+     // senão usamos um array vazio no lugar
+     if (carIds && carIds.length > 0) {
+       await Promise.all(carIds.map(
+         // Usando a camada Model para vincular os carros à pessoa motorista
+         async (carId) => driverCarModel.insert({ driverId: newDriver.id, carId }),
+       ));
+       // Adicionamos os carros ao resultado final
+       newDriver.cars = await Promise.all(
+         carIds.map(async (carId) => carModel.findById(carId)),
+       );
+     } else {
+       newDriver.cars = [];
+     }
+     
+     // Retornando os dados da pessoa motorista
+     return { type: null, message: newDriver };
+// };
+
+// module.exports = {
+//   ...
+     createDriver,
+// };
+Os testes agora estão quase passando, (pode haver diferenças no id, por exemplo), pois ainda faltam os stubs para isolá-los! 😱
+⚠️ Atenção: Observe que cada vez que essa função é executada nos testes sem os stubs ela modifica o banco de dados. Isso pode afetar outros testes caso eles não estejam isolados. ⚡😨 Viu só como é importante isolar os testes?
+🚀 Parte 3.3: Crie stubs para isolar os testes
+Como nossa função vai precisar de alguns carros, criamos um mock com uma lista deles para usarmos nos testes
+Copiar
+// tests/unit/services/mocks/car-exercises.service.mock.js
+const carList = [
+  {
+    id: 1,
+    model: 'Renault Sandero',
+    color: 'Branco',
+    licensePlate: 'NCA-0956',
+  },
+  {
+    id: 2,
+    model: 'Volkswagen Gol',
+    color: 'Vermelho',
+    licensePlate: 'DZG-4376',
+  },
+  {
+    id: 3,
+    model: 'Chevrolet Onix',
+    color: 'Prata',
+    licensePlate: 'KBJ-2899',
+  },
+  {
+    id: 4,
+    model: 'Renault Logan',
+    color: 'Azul',
+    licensePlate: 'NFA-9035',
+  },
+  {
+    id: 5,
+    model: 'Fiat Siena',
+    color: 'Cinza',
+    licensePlate: 'HTH-9177',
+  },
+  {
+    id: 6,
+    model: 'Nissan Versa',
+    color: 'Preto',
+    licensePlate: 'BGY-6802',
+  },
+];
+
+// ...
+
+// module.exports = {
+     carList,
+//   createdCar,
+// };
+Voltando nos testes, criamos alguns stubs da camada Model usando os mocks 👍
+Esses stubs são criados conforme o comportamento de cada função
+Copiar
+// tests/unit/services/driver-exercises.service.test.js
+// ...
+
+// const {
+//   driverModel,
+     driverCarModel,
+     carModel,
+// } = require('../../../src/models');
+
+// const { driverService } = require('../../../src/services');
+
+const { carList } = require('./mocks/car-exercises.service.mock');
+
+// const {
+     // ...
+     createdDriver,
+// } = require('./mocks/driver-exercises.service.mock');
+
+// ...
+
+//   describe('Tentando cadastrar uma nova pessoa motorista com erros de id', function () {
+       beforeEach(function () {
+         // Aqui o nosso stub deve simular que o carro solicitado não existe
+         sinon.stub(carModel, 'findById').resolves();
+       });
+
+       afterEach(function () {
+         sinon.restore();
+       });
+
+    // it('retorna o erro "CAR_NOT_FOUND"', async function () {
+    // ...  
+
+//  describe('Cadastrando uma nova pessoa motorista com sucesso sem carros', function () {
+       beforeEach(function () {
+         // como aqui estamos criando motorista sem carro,
+         // não precisamos encontrar nenhum, apenas cadastrar e encontrar a pessoa motorista
+         sinon.stub(driverModel, 'insert').resolves(1);
+         sinon.stub(driverModel, 'findById').resolves(createdDriver);
+       });
+
+       afterEach(function () {
+         sinon.restore();
+       });
+
+    // it('retorna a pessoa motorista cadastrada', async function () {
+    // ...
+
+//   describe('Cadastrando uma nova pessoa motorista com sucesso com carros', function () {
+       beforeEach(function () {
+         // já aqui temos vários stubs em cena!
+
+         // 1 - cadastra e encontra a pessoa motorista ok
+         sinon.stub(driverModel, 'insert').resolves(1);
+         sinon.stub(driverModel, 'findById').resolves(createdDriver);
+
+         // 2 - criação de relacionamentos ok
+         sinon.stub(driverCarModel, 'insert').resolves();
+
+         // 3 - ao procurar um carro, mande o primeiro e depois o segundo da lista
+         // eles são chamados tanto ao validar como para retornar na função principal
+         sinon.stub(carModel, 'findById')
+         .onCall(0) // chamada da validação
+           .resolves(carList[0])
+         .onCall(1) // chamada da validação
+           .resolves(carList[1])
+         .onCall(2) // chamada da função
+           .resolves(carList[0])
+         .onCall(3) // chamada da função
+           .resolves(carList[1]);
+       });
+
+       afterEach(function () {
+         sinon.restore();
+       });
+
+    // it('retorna os carros vinculados à pessoa motorista', async function () {
+    // ...
+Ufa! Se você leu tudo até aqui, parabéns! 👏 Abaixo está o código completo dos exercícios. Não esqueça de tomar uma água! 🚰
+Metadata	Value
+object	content
+duration	
+self-contained	no
+type	context
+skills	[]
+reinforces	[]
+Código finalizado
+Copiar
+// tests/unit/services/driver-exercises.service.test.js
+const { expect } = require('chai');
+const sinon = require('sinon');
+
+const {
+  driverModel,
+  driverCarModel,
+  carModel,
+} = require('../../../src/models');
+
+const {
+  driverService,
+} = require('../../../src/services');
+
+const {
+  carList,
+} = require('./mocks/car-exercises.service.mock');
+
+const {
+  driverList,
+  createdDriverWithoutCars,
+  createdDriverWithCars,
+  createdDriver,
+} = require('./mocks/driver-exercises.service.mock');
+
+const validDriverName = 'Gus';
+const invalidValue = '1';
+
+describe('Verificando service Driver - Exercícios', function () {
+  describe('Listando as pessoas motoristas', function () {
+    beforeEach(function () {
+      sinon.stub(driverModel, 'findAll').resolves(driverList);
+    });
+
+    afterEach(function () {
+      sinon.restore();
+    });
+    
+    it('a lista de motoristas é um array', async function () {
+      const travel = await driverService.getDrivers();
+
+      expect(travel.message instanceof Array).to.equal(true);
+    });
+
+    it('retorna a lista de motoristas com sucesso', async function () {
+      const travel = await driverService.getDrivers();
+
+      expect(travel.message).to.deep.equal(driverList);
+    });
+  });
+
+  describe('Tentando cadastrar uma nova pessoa motorista com erros semânticos', function () {
+    it('retorna um erro ao receber um nome inválido', async function () {
+      const response = await driverService.createDriver(invalidValue);
+
+      expect(response.type).to.equal('INVALID_VALUE');
+      expect(response.message).to.equal(
+        '"name" length must be at least 3 characters long',
+      );
+    });
+    it('retorna um erro ao receber uma lista de carros inválida', async function () {
+      const response = await driverService.createDriver(
+        validDriverName,
+        invalidValue,
+      );
+
+      expect(response.type).to.equal('INVALID_VALUE');
+      expect(response.message).to.equal('"carIds" must be an array');
+    });
+  });
+
+  describe('Tentando cadastrar uma nova pessoa motorista com erros de id', function () {
+    beforeEach(function () {
+      sinon.stub(carModel, 'findById').resolves();
+    });
+
+    afterEach(function () {
+      sinon.restore();
+    });
+    it('retorna o erro "CAR_NOT_FOUND"', async function () {
+      const response = await driverService.createDriver(validDriverName, [999]);
+
+      expect(response.type).to.equal('CAR_NOT_FOUND');
+    });
+    
+    it('retorna a mensagem "Some car is not found"', async function () {
+      const response = await driverService.createDriver(validDriverName, [999]);
+
+      expect(response.message).to.equal('Some car is not found');
+    });
+  });
+
+  describe('Cadastrando uma nova pessoa motorista com sucesso sem carros', function () {
+    beforeEach(function () {
+      sinon.stub(driverModel, 'insert').resolves(createdDriver);
+    });
+
+    afterEach(function () {
+      sinon.restore();
+    });
+    it('retorna a pessoa motorista cadastrada', async function () {
+      const response = await driverService.createDriver(validDriverName);
+      
+      expect(response.message).to.deep.equal(createdDriverWithoutCars);
+    });
+
+    it('não retorna erro', async function () {
+      const response = await driverService.createDriver(validDriverName);
+      
+      expect(response.type).to.equal(null);
+    });
+  });
+
+  describe('Cadastrando uma nova pessoa motorista com sucesso com carros', function () {
+    beforeEach(function () {
+      sinon.stub(driverModel, 'insert').resolves(createdDriver);
+      sinon.stub(driverCarModel, 'insert').resolves();
+      sinon.stub(carModel, 'findById')
+      .onCall(0) // chamada da validação
+        .resolves(carList[0])
+      .onCall(1) // chamada da validação
+        .resolves(carList[1])
+      .onCall(2) // chamada da função
+        .resolves(carList[0])
+      .onCall(3) // chamada da função
+        .resolves(carList[1]);
+    });
+
+    afterEach(function () {
+      sinon.restore();
+    });
+
+    it('retorna os carros vinculados à pessoa motorista', async function () {
+      const response = await driverService.createDriver(
+        validDriverName,
+        [1, 2],
+      );
+
+      expect(response.type).to.equal(null);
+      expect(response.message).to.deep.equal(createdDriverWithCars);
+    });
+
+    it('não retorna erro', async function () {
+      const response = await driverService.createDriver(
+        validDriverName,
+        [1, 2],
+      );
+
+      expect(response.type).to.equal(null);
+    });
+  });
+});
+Copiar
+// tests/unit/services/mocks/driver-exercises.service.mock.js
+const driverList = [
+  { id: 1, name: 'Liana Cisneiros' },
+  { id: 2, name: 'Fábio Frazão' },
+  { id: 3, name: 'Anastacia Bicalho' },
+  { id: 4, name: 'Samara Granjeiro' },
+  { id: 5, name: 'Levi Teixeira' },
+];
+
+const createdDriver = { id: 1, name: 'Gus' };
+
+const createdDriverWithoutCars = {
+  ...createdDriver,
+  cars: [],
+};
+
+const createdDriverWithCars = {
+  ...createdDriver,
+  cars: [
+    {
+      color: 'Branco',
+      id: 1,
+      licensePlate: 'NCA-0956',
+      model: 'Renault Sandero',
+    },
+    {
+      color: 'Vermelho',
+      id: 2,
+      licensePlate: 'DZG-4376',
+      model: 'Volkswagen Gol',
+    },
+  ],
+};
+
+module.exports = {
+  driverList,
+  createdDriver,
+  createdDriverWithCars,
+  createdDriverWithoutCars,
+};
+Copiar
+// src/services/driver.service.js
+// const {
+//   travelModel,
+     driverModel,
+     driverCarModel,
+     carModel,
+// } = require('../models');
+const { validateNewDriver } = require('./validations/validations-exercises');
+
+// ...
+
+const getDrivers = async () => {
+  const drivers = await driverModel.findAll();
+  return { type: null, message: drivers };
+};
+
+const createDriver = async (name, carIds) => {
+  const error = await validateNewDriver(name, carIds);
+  if (error.type) return error;
+
+  const newDriver = await driverModel.insert({ name });
+  
+  if (carIds && carIds.length > 0) {
+    await Promise.all(carIds.map(
+      async (carId) => driverCarModel.insert({ driverId: newDriver.id, carId }),
+    ));
+    newDriver.cars = await Promise.all(
+      carIds.map(async (carId) => carModel.findById(carId)),
+    );
+  } else {
+    newDriver.cars = [];
+  }
+
+  return { type: null, message: newDriver };
+};
+
+// module.exports = {
+//   getWaitingDriverTravels,
+//   travelAssign,
+//   startTravel,
+//   endTravel,
+     getDrivers,
+     createDriver,
+// };
+Copiar
+// tests/unit/services/car-exercises.service.test.js
+const { expect } = require('chai');
+const sinon = require('sinon');
+
+const carModel = require('../../../src/models/car.model');
+const { carService } = require('../../../src/services');
+const { createdCar } = require('./mocks/car-exercises.service.mock');
+
+const validModel = 'Chevrolet Monza';
+const validColor = 'Branco';
+const validPlate = 'ABC1A2B';
+const invalidValue = '9';
+
+describe('Verificando service Car', function () {
+  describe('Tentando cadastrar um novo carro com erros semânticos', function () {
+    it('retorna um erro ao receber um modelo inválido', async function () {
+      const response = await carService.createCar(invalidValue, validColor, validPlate);
+
+      expect(response.type).to.equal('INVALID_VALUE');
+      expect(response.message).to.equal(
+        '"model" length must be at least 3 characters long',
+      );
+    });
+
+    it('retorna um erro ao receber uma cor inválida', async function () {
+      const response = await carService.createCar(validModel, invalidValue, validPlate);
+
+      expect(response.type).to.equal('INVALID_VALUE');
+      expect(response.message).to.equal(
+        '"color" length must be at least 2 characters long',
+      );
+    });
+
+    it('retorna um erro ao receber uma placa inválida', async function () {
+      const response = await carService.createCar(validModel, validColor, invalidValue);
+
+      expect(response.type).to.equal('INVALID_VALUE');
+      expect(response.message).to.equal(
+        '"licensePlate" length must be 7 characters long',
+      );
+    });
+  });
+
+  describe('Cadastrando um novo carro com sucesso', function () {
+    afterEach(function () {
+      sinon.restore();
+    });
+
+    beforeEach(function () {
+      sinon.stub(carModel, 'insert').resolves(createdCar);
+    });
+
+    it('não retorna erros', async function () {
+      const response = await carService.createCar(validModel, validColor, validPlate);
+
+      expect(response.type).to.equal(null);
+    });
+
+    it('retorna o carro cadastrado', async function () {
+      const response = await carService.createCar(validModel, validColor, validPlate);
+
+      expect(response.message).to.equal(createdCar);
+    });
+  });
+});
+Copiar
+// tests/unit/services/mocks/car-exercises.service.mock.js
+const carList = [
+  {
+    id: 1,
+    model: 'Renault Sandero',
+    color: 'Branco',
+    licensePlate: 'NCA-0956',
+  },
+  {
+    id: 2,
+    model: 'Volkswagen Gol',
+    color: 'Vermelho',
+    licensePlate: 'DZG-4376',
+  },
+  {
+    id: 3,
+    model: 'Chevrolet Onix',
+    color: 'Prata',
+    licensePlate: 'KBJ-2899',
+  },
+  {
+    id: 4,
+    model: 'Renault Logan',
+    color: 'Azul',
+    licensePlate: 'NFA-9035',
+  },
+  {
+    id: 5,
+    model: 'Fiat Siena',
+    color: 'Cinza',
+    licensePlate: 'HTH-9177',
+  },
+  {
+    id: 6,
+    model: 'Nissan Versa',
+    color: 'Preto',
+    licensePlate: 'BGY-6802',
+  },
+];
+
+const createdCar = {
+  id: 1,
+  model: 'Chevrolet Monza',
+  color: 'Branco',
+  licensePlate: 'ABC1A2B',
+};
+
+module.exports = {
+  carList,
+  createdCar,
+};
+Copiar
+// src/services/car.service.js
+const { carModel } = require('../models');
+const { validateNewCar } = require('./validations/validations-exercises');
+
+const createCar = async (model, color, licensePlate) => {
+  const error = validateNewCar(model, color, licensePlate);
+  if (error.type) return error;
+
+  const newCar = await carModel.insert({ model, color, licensePlate });
+  return { type: null, message: newCar };
+};
+
+module.exports = {
+  createCar,
+};
+Copiar
+// src/services/index.js
+   const carService = require('./car.service');
+// const driverService = require('./driver.service');
+// const passengerService = require('./passenger.service');
+// 
+// module.exports = {
+     carService,
+//   driverService,
+//   passengerService,
+// };
+Copiar
+// src/services/validations/schemas-exercises.js
+const Joi = require('joi');
+const { idSchema } = require('./schemas');
+
+const addCarSchema = Joi.object({
+  model: Joi.string().min(3).required(),
+  color: Joi.string().min(2).required(),
+  licensePlate: Joi.string().length(7).required(),
+});
+
+const addDriverSchema = Joi.object({
+  name: Joi.string().min(3).required(),
+  carIds: Joi.array().items(idSchema),
+});
+
+module.exports = {
+  addCarSchema,
+  addDriverSchema,
+};
+Copiar
+// src/services/validations/validations-exercises.js
+const { carModel } = require('../../models');
+const { addCarSchema, addDriverSchema } = require('./schemas-exercises');
+
+const validateNewCar = (model, color, licensePlate) => {
+  const { error } = addCarSchema
+    .validate({ model, color, licensePlate });
+ 
+  if (error) return { type: 'INVALID_VALUE', message: error.message };
+  return { type: null, message: '' };
+};
+
+const validateNewDriver = async (name, carIds) => {
+  const { error } = addDriverSchema
+    .validate({ name, carIds });
+  if (error) return { type: 'INVALID_VALUE', message: error.message };
+
+  if (carIds) {
+    // chamamos `carModel.findById` em cada um dos ids para buscar os carros na DB
+    // quando um carro não existe, sua Promise retorna `undefined`
+    // `Promise.all` aguarda todas as Promises retornarem
+    // e retorna a array de resultados para `cars`
+    const cars = await Promise.all(
+      carIds.map(async (carId) => carModel.findById(carId)),
+    );
+
+    const someCarIsMissing = cars.some((car) => car === undefined);
+    if (someCarIsMissing) return { type: 'CAR_NOT_FOUND', message: 'Some car is not found' };
+  }
+
+  return { type: null, message: '' };
+};
+
+module.exports = {
+  validateNewCar,
+  validateNewDriver,
+};
