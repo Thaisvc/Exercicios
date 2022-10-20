@@ -5,6 +5,13 @@ const books = await Book.findAll();
 return books;
 };
 
+
+const getById = async (idBook) => {
+const bookID = await Book.findByPk(idBook);
+return bookID;
+};
+
 module.exports = {
     getAll,
+    getById,
   };
