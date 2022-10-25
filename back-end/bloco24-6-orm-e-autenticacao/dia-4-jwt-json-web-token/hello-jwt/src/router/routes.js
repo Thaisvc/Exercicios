@@ -1,4 +1,4 @@
-const  express = require('express');
+/* const  express = require('express');
 
 const routers = express.Router();
 
@@ -9,4 +9,4 @@ const userRoute = require('./user.route');
 
 routers.use('/', userRoute )
 
-module.exports = routers
+module.exports = routers */
