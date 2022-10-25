@@ -8,4 +8,5 @@ const userRoute = require('./user.route');
 //EXEMPLO  routers.use('/NAMEROTA', ROTA);
 
 routers.use('/', userRoute )
+
 module.exports = routers
