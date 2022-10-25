@@ -1,6 +1,7 @@
 const  express = require('express');
+// CHAMAR FUNÇAO DO CONTROLLER
+const router = express.Router();
 
-const routers = express.Router();
-// CHAMA ROTA EX 6.2
-//EXEMPLO  routers.use('/NAMEROTA', ROTA);
-module.exports = routers
+router.post('/login')
+
+module.exports = router
