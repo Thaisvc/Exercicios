@@ -1,0 +1,225 @@
+Exercício 3
+Crie um script para converter unidades de medida de massa:
+
+Esse script deverá se chamar mass.ts;
+Ele deverá possuir uma função chamada convert que recebe como parâmetro:
+valor - number
+unidade base - string
+unidade para a conversão - string
+Tabela de conversão:
+
+Nome	Símbolo	Valor
+Quilograma	kg	1000g
+Hectograma	hg	100g
+Decagrama	dag	10g
+Grama	g	1g
+Decigrama	dg	0,1g
+Centigrama	cg	0,01g
+Miligrama	mg	0,001g
+Solução
+Copiar
+touch mass.ts
+Copiar
+// ./mass.ts
+
+const units = ["kg", "hg", "dag", "g", "dg", "cg", "mg"];
+
+function convert(value: number, fromUnit: string, toUnit: string): number {
+    const fromIndex = units.indexOf(fromUnit);
+    const toIndex = units.indexOf(toUnit);
+    const exponent = (toIndex - fromIndex);
+
+    return value * Math.pow(10, exponent);
+}
+Exercício 4
+Crie um script para converter unidades de medida de capacidade:
+
+Esse script deverá se chamar capacity.ts;
+Ele deverá possuir uma função chamada convert que recebe como parâmetro:
+valor - number
+unidade base - string
+unidade para a conversão - string
+Tabela de conversão:
+
+Nome	Símbolo	Valor
+Quilolitro	kl	1000l
+Hectolitro	hl	100l
+Decalitro	dal	10l
+Litro	l	1l
+Decilitro	dl	0,1l
+Centilitro	cl	0,01l
+Mililitro	ml	0,001l
+Solução
+Copiar
+touch capacity.ts
+Copiar
+// ./capacity.ts
+
+const units = ["kl", "hl", "dal", "l", "dl", "cl", "ml"];
+
+function convert(value: number, fromUnit: string, toUnit: string): number {
+    const fromIndex = units.indexOf(fromUnit);
+    const toIndex = units.indexOf(toUnit);
+    const exponent = (toIndex - fromIndex);
+
+    return value * Math.pow(10, exponent);
+}
+Exercício 5
+Crie um script para converter unidades de medida de área:
+
+Esse script deverá se chamar area.ts;
+Ele script deverá possuir uma função chamada convert que recebe como parâmetro:
+valor - number
+unidade base - string
+unidade para a conversão - string
+Obs: atente-se à conversão de metros quadrados, que deve ser realizada de 100 em 100.
+
+Tabela de conversão:
+
+Nome	Símbolo	Valor
+Quilômetro quadrado	km²	10⁶ m²
+Hectômetro quadrado	hm²	10⁴ m²
+Decâmetro quadrado	dam²	10² m²
+Metro quadrado	m²	1m²
+Decímetro quadrado	dm²	10⁻² m²
+Centímetro quadrado	cm²	10⁻⁴ m²
+Milímetro quadrado	mm²	10⁻⁶ m²
+Solução
+Copiar
+touch area.ts
+Copiar
+// ./area.ts
+
+const units = ["km²", "hm²", "dam²", "m²", "dm²", "cm²", "mm²"];
+
+function convert(value: number, fromUnit: string, toUnit: string): number {
+    const fromIndex = units.indexOf(fromUnit);
+    const toIndex = units.indexOf(toUnit);
+    const exponent = (toIndex - fromIndex);
+
+    return value * Math.pow(100, exponent);
+}
+Exercício 6
+Crie um script para converter unidades de medida de volume:
+
+Esse script deverá se chamar volume.ts;
+Ele deverá possuir uma função chamada convert que recebe como parâmetro:
+valor - number
+unidade base - string
+unidade para a conversão - string
+Obs: atente-se à conversão de metros cúbicos, que deve ser realizada de 1000 em 1000.
+
+Tabela de conversão:
+
+Nome	Símbolo	Valor
+Quilômetro cúbico	km³	10⁹ m³
+Hectômetro cúbico	hm³	10⁶ m³
+Decâmetro cúbico	dam³	10³ m³
+Metro cúbico	m³	1m³
+Decímetro cúbico	dm³	10⁻³ m³
+Centímetro cúbico	cm³	10⁻⁶ m³
+Milímetro cúbico	mm³	10⁻⁹ m³
+Solução
+Copiar
+touch volume.ts
+Copiar
+// ./volume.ts
+
+const units = ["km³", "hm³", "dam³", "m³", "dm³", "cm³", "mm³"];
+
+function convert(value: number, fromUnit: string, toUnit: string): number {
+    const fromIndex = units.indexOf(fromUnit);
+    const toIndex = units.indexOf(toUnit);
+    const exponent = (toIndex - fromIndex);
+
+    return value * Math.pow(1000, exponent);
+}
+Exercício 7
+Vamos tornar nossos scripts de unidades de medida mais interativos! Vamos adicionar input de quem usa o script. Para isso, utilize o pacote readline-sync, documentação.
+
+Em cada script, crie uma função chamada exec que:
+
+Capta as entradas da pessoa usuária via terminal;
+Chama a função de conversão passando as entradas da pessoa usuária como parâmetro;
+Exibe uma mensagem com o resultado. Ex: “1km é igual a 1000m.”;
+Não se esqueça de chamar a função exec ao final do script. exec();“
+Solução
+Modificando os nossos scripts:
+
+Copiar
+// ./length.ts
+// lembrete: mudar o array units e a base para o cálculo em cada arquivo!
+
+import readline from "readline-sync"; // importamos o pacote readline-sync
+const units = ["km", "hm", "dam", "m", "dm", "cm", "mm"];
+
+function convert(value: number, fromUnit: string, toUnit: string): number {
+    const fromIndex = units.indexOf(fromUnit); // pegamos o index da unidade base no array
+    const toIndex = units.indexOf(toUnit); // pegamos o index da unidade para a conversão
+    const exponent = (toIndex - fromIndex); // calculamos o expoente a partir da diferença dos index
+
+    return value * Math.pow(10, exponent);
+}
+
+function exec() {
+  // pegamos o valor a ser convertido digitado pela pessoa usuária
+  const value = readline.questionFloat("Digite o valor a ser convertido: \n");
+
+  // pedimos que a pessoa usuária escolha a unidade base
+  const fromUnitChoiceIndex = readline.keyInSelect(units, "Escolha um número para a unidade base:");
+
+  // pedimos que a pessoa usuária escolha a unidade para conversão
+  const toUnitChoiceIndex = readline.keyInSelect(units, "Escolha um número para a conversão:");
+
+
+  const fromUnitChoice = units[fromUnitChoiceIndex];
+  const toUnitChoice = units[toUnitChoiceIndex];
+
+  const result = convert(value, fromUnitChoice, toUnitChoice)
+
+  // montamos a mensagem de saída
+  const message = `${value}${fromUnitChoice} é igual a ${result}${toUnitChoice}`
+
+  // printamos a mensagem de saída no terminal
+  console.log(message);
+}
+
+exec();
+Exercício 8
+Crie um arquivo index.ts que pergunta qual conversão a pessoa usuária deseja realizar, e chama o script correspondente:
+
+O script deve ser acionado por meio do comando npm start no package.json;
+Utilize o readline-sync para realizar o input de dados;
+Quando executado, o script deve exibir uma lista numerada dos scripts disponíveis;
+Você pode utilizar o require para executar o script em questão.
+Solução
+Copiar
+touch index.ts
+Copiar
+/* ... */
+// "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx tsc && node ./dist/index.js"
+// },
+/* ... */
+Copiar
+// ./index.ts
+
+import readline from "readline-sync"; // importamos o pacote readline-sync
+
+// criamos um array de objetos com o nome do script e o caminho do script a ser executado
+const scripts = [
+    { name: "Converter comprimento", script: "./length" },
+    { name: "Converter massa", script: "./mass" },
+    { name: "Converter capacidade", script: "./capacity" },
+    { name: "Converter área", script: "./area" },
+    { name: "Converter volume", script: "./volume" }
+];
+
+// criamos um novo array somente com os nomes dos scripts
+const scriptNames = scripts.map(item => item.name);
+
+// pedimos à pessoa usuária para escolher um dos scripts de conversão
+const choice = readline.keyInSelect(scriptNames, "Escolha um número para executar o script de conversão de unidade");
+
+require(scripts[choice].script); // executamos o script escolhido usando o require
