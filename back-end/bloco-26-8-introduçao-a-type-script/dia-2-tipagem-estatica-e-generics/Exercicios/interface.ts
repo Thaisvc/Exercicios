@@ -12,12 +12,13 @@ b) Crie uma pizza sabor Marguerita de 6 fatias;
 c) Crie uma pizza sabor Nutela de 4 fatias.
 
  */
-type Slices  = 4 | 6 | 8;
+
+type Slices = 4 | 6 | 8;
 
 interface IPizza {
     flavor: string;
     slices: Slices;
-    
+
 }
 
 const typePizza1: IPizza = {
@@ -38,3 +39,71 @@ const typePizza3: IPizza = {
 
 console.log(typePizza1);
 
+
+import { Common, Vegetarian, Sugar } from "./interfeceAndTypes";
+
+interface PizzaVegetarian extends IPizza {
+    flavor: Vegetarian
+}
+
+interface PizzaCommon extends IPizza {
+    flavor: Common
+}
+
+interface PizzaSugar extends IPizza {
+    flavor: Sugar,
+    slices: 4
+}
+
+
+const frango: PizzaCommon = {
+    flavor: "Frango",
+    slices: 8
+  }
+
+  console.log(frango);
+  
+  const pepperoni: PizzaCommon = {
+    flavor: "Pepperoni",
+    slices: 6
+  }
+  
+  console.log(pepperoni);
+  
+  const marguerita: PizzaVegetarian = {
+    flavor: "Marguerita",
+    slices: 8
+  }
+  
+  console.log(marguerita);
+  
+  const palmito: PizzaVegetarian = {
+    flavor: "Palmito",
+    slices: 8
+  }
+  
+  console.log(palmito);
+  
+  const goiabadaEQueijo: PizzaSugar = {
+    flavor: "Goiabada com Queijo",
+    slices: 4
+  }
+  
+  console.log(goiabadaEQueijo);
+
+
+
+  // EXEMPLO DE  TYPE ALIAIS
+  type Point = {
+    x: number;
+    y: number;
+  };
+
+  
+  // EXEMPLO DE  TYPE UNIONS
+  function imprimirCPF(cpf: number | string){
+    console.log("Seu CPF é: " + cpf);
+  }
+  
+  imprimirCPF(11111111111);
+  imprimirCPF('111.111.111-11');
