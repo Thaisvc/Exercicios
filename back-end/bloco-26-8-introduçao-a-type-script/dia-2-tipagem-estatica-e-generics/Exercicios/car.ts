@@ -21,7 +21,7 @@ class Car { // DEFINIR ESTRUTURA PADRAO PARA CAR
     brand: string; //  ATRIBUTOS DEFINIDOS PARA CLASS
     color: string;
     doors: number;
-
+   
     constructor(brand: string /* BRAND DEVE TER O MSM TIPO DEFINIDO NA CALSS */, color: string, doors: number) { // INICIALIZA OS ATRIBUTOS | RECEBE PARAMETROS E  COM BASE NELES INICIALIZA OS VALORES DOS ATRIBUTOS
         this.brand = brand; // brand = brand PASSO O VALOR DOS PARAMETROS PARA OS ATRIBUTOS PARA Q ELE SEJA INICIALIZADO
         this.color = color; // this = SIGNIFICA DENTRO DESSA CLASS (class car) EXISTE ESSES ATRIBUTOS
