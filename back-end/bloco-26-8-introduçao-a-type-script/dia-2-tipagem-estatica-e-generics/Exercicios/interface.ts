@@ -17,32 +17,24 @@ type Slices  = 4 | 6 | 8;
 interface IPizza {
     flavor: string;
     slices: Slices;
-    exibir(): void;
+    
 }
 
 const typePizza1: IPizza = {
     flavor: 'Calabresa',
     slices: 8,
-    exibir(): void {
-        console.log('pizza de calabresa com 8 fatias');
-        
-    }
 }
 
 const typePizza2: IPizza = {
     flavor: 'Marguerita',
     slices: 6,
-    exibir(): void {
-        console.log('pizza de Marguerita com 6 fatias');
-        
-    }
 }
 
 const typePizza3: IPizza = {
     flavor: 'Nutela',
     slices: 4,
-    exibir(): void {
-        console.log('pizza de Nutela com 4 fatias');
-        
-    }
 }
+
+
+console.log(typePizza1);
+
