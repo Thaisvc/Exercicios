@@ -22,57 +22,54 @@ class Car { // DEFINIR ESTRUTURA PADRAO PARA CAR
     color: string;
     doors: number;
 
-    construtor(brand: string /* BRAND DEVE TER O MSM TIPO DEFINIDO NA CALSS */, color: string, doors: number) { // INICIALIZA OS ATRIBUTOS | RECEBE PARAMETROS E  COM BASE NELES INICIALIZA OS VALORES DOS ATRIBUTOS
+    constructor(brand: string /* BRAND DEVE TER O MSM TIPO DEFINIDO NA CALSS */, color: string, doors: number) { // INICIALIZA OS ATRIBUTOS | RECEBE PARAMETROS E  COM BASE NELES INICIALIZA OS VALORES DOS ATRIBUTOS
         this.brand = brand; // brand = brand PASSO O VALOR DOS PARAMETROS PARA OS ATRIBUTOS PARA Q ELE SEJA INICIALIZADO
         this.color = color; // this = SIGNIFICA DENTRO DESSA CLASS (class car) EXISTE ESSES ATRIBUTOS
         this.doors = doors; //  USAMOS THIS PARA ACESSAR E ENCHERGA OS ATRIBUTOS DE CLASS
     };
 
-    honk() { // METADO FUNÇAO
+    honk(): void { // METADO FUNÇAO
         console.log('ACIONA A buzina');
 
     };
 
-    turnOn(){
+    turnOn(): void {
         console.log('ligar o carro');
-        
+
     };
 
-    turnOff(){
+    turnOff(): void {
         console.log('desliga o carro');
-        
+
     };
 
-    speedUp(){
+    speedUp(): void {
         console.log('acelera o carro');
-        
+
     };
 
-    speedDown(){
+    speedDown():void {
         console.log('reduz a velocidade');
-        
-    };
-     
-    stop(){
-        console.log('para o carro');
-        
+
     };
 
-    turn(direçao:string){
+    stop():void {
+        console.log('para o carro');
+    };
+
+    turn(direçao: string): void {
         console.log(`virar o carro para ${direçao}`);
-        
+
     };
 };
 
 // INSTACIAR A CLASS PARA USALA SENDO UM OBJ PODERIA EXPORTALA PARA USAR EM OURO ARQUIVO
 
-// const car = OBJETO
-//new car() = CLASS
+// const cars = OBJETO
+//new Car() = CLASS
 // NEW SIGNIFICA Q ESTOU INSTANCIANDO MINHA CLASSE E CRIANDO UM OBJ CHAMADO CAR
 // O OBJ PASSA A SER UMA REPRESENTAÇAO DA CLASSE 
 // NAO USO MAIS A CLASS E SIM CHAMO O OBJ  -> cars.brand
 //const cars = new Car('ford', 'azul', 4);
 
-
-
-  export default Car;
+export default Car;
