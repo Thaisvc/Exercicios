@@ -70,6 +70,7 @@ class Car { // DEFINIR ESTRUTURA PADRAO PARA CAR
 // NEW SIGNIFICA Q ESTOU INSTANCIANDO MINHA CLASSE E CRIANDO UM OBJ CHAMADO CAR
 // O OBJ PASSA A SER UMA REPRESENTAÇAO DA CLASSE 
 // NAO USO MAIS A CLASS E SIM CHAMO O OBJ  -> cars.brand
-const cars = new Car('ford', 'azul', 4);
-cars.brand = 'toyota' // ALTERAR O NOME
+/* const cars = new Car('ford', 'prata', 4);
+cars.brand = 'gol' // ALTERAR O NOME */
+
 export default Car;
