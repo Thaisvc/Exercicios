@@ -102,3 +102,5 @@ personOne.trabalhoNotass = [45, 45];
 console.log(personOne);
 console.log('Soma de todas as notas: ', personOne.sumGrades());
 console.log('Média de todas as notas: ', personOne.sumAverageGrade());
+
+
