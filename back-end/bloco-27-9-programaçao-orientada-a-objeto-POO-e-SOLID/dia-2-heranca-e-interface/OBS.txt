@@ -1,0 +1,32 @@
+// Vamos dar continuidade a modelagem do nosso software escolar desenvolvido no exercício do dia anterior. Para isso, iremos refatorar algumas partes do nosso sistema aplicando os novos conceitos de herança que aprendemos no dia de hoje e melhorando alguns aspectos da nossa implementação inicial.
+
+// Importante: Devido a uma restrição em transpilar arquivos .ts para .js em versões posteriores ao ES5, utilize o seguinte comando para executar a transpilação corretamente:
+
+
+// npx tsc -t es5 ./index.ts
+
+Recapitulando: Nós desenvolvemos uma classe que representava a pessoa estudante da nossa escola, contendo os atributos matrícula, nome, quatro notas de prova e duas notas de trabalho. Além disso, nossa classe possuía dois métodos: um que calculava a soma das notas da pessoa estudante e um que calculava a média das notas da pessoa estudante.
+
+Para facilitar: Visando facilitar o entendimento dos enunciados dos nossos exercícios, adotaremos a seguinte notação para dispor a modelagem das nossas classes:
+
+
+`Class`: Nome da classe, caso seja uma classe
+`Interface`: Nome da interface, caso seja uma interface
+`Extends`: Classe da qual herda (superclasse), caso exista
+`Implements`: Interfaces a qual implementa, caso exista
+`Attributes`: Atributos
+`Methods`: Métodos
+`Validations`: Validações que devem ser aplicadas aos atributos
+
+
+`Class`: Person
+`Attributes`:
+    - name: nome da pessoa
+    - birthDate: data de nascimento da pessoa
+`Methods`:
+    - Getters/Setters
+    - constructor: deve receber como parâmetro nome e data de nascimento
+`Validations`:
+    - O nome deve ter no mínimo três caracteres
+    - A data de nascimento não pode ser uma data no futuro
+    - A pessoa não pode possuir mais de 120 anos
