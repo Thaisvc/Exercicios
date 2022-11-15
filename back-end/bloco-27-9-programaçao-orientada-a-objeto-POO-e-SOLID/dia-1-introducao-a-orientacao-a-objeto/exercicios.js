@@ -1,3 +1,12 @@
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var Student = /** @class */ (function () {
     function Student(inscricao, nome) {
         this._inscricao = inscricao;
@@ -36,7 +45,7 @@ var Student = /** @class */ (function () {
             if (valor.length > 4) {
                 throw new Error('A pessoa estudante só pode possuir 4 notas de provas.');
             }
-            this.examsGradess = valor;
+            this._examsGrades = valor;
         },
         enumerable: false,
         configurable: true
@@ -54,10 +63,24 @@ var Student = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    // metado para soma
+    Student.prototype.sumGrades = function () {
+        return __spreadArray(__spreadArray([], this.examsGradess, true), this.trabalhoNotass, true).reduce(function (previousNote, note) {
+            var nextNote = note + previousNote;
+            return nextNote;
+        }, 0);
+    };
+    // metado calcula a média das notas
+    Student.prototype.sumAverageGrade = function () {
+        var sumGrades = this.sumGrades();
+        var divider = this.examsGradess.length + this.trabalhoNotass.length;
+        return Math.round(sumGrades / divider);
+    };
     return Student;
 }());
-// Para testar!
 var personOne = new Student('202001011', 'Maria da Silva');
+personOne.examsGradess = [25, 20, 23, 23];
+personOne.trabalhoNotass = [45, 45];
 console.log(personOne);
-var personTwo = new Student('202001012', 'João da Silva');
-console.log(personTwo);
+console.log('Soma de todas as notas: ', personOne.sumGrades());
+console.log('Média de todas as notas: ', personOne.sumAverageGrade());

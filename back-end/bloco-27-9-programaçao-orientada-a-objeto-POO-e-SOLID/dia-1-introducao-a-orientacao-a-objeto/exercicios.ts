@@ -45,7 +45,7 @@ class Student {
             throw new Error
                 ('A pessoa estudante só pode possuir 4 notas de provas.')
         }
-        this.examsGradess = valor;
+        this._examsGrades = valor;
     }
 
 
@@ -65,14 +65,30 @@ class Student {
         this._trabalhoNotas = valor;
     }
 
-}
+    // metado para soma
+    sumGrades(): number {
+        return [...this.examsGradess, ...this.trabalhoNotass]
+            .reduce((previousNote, note) => {
+                const nextNote = note + previousNote;
 
-// Para testar!
+                return nextNote;
+            }, 0);
+    }
+
+    // metado calcula a média das notas
+    sumAverageGrade(): number {
+        const sumGrades = this.sumGrades();
+        const divider = this.examsGradess.length + this.trabalhoNotass.length;
+
+        return Math.round(sumGrades / divider);
+    }
+}
 
 const personOne = new Student('202001011', 'Maria da Silva');
 
+personOne.examsGradess = [25, 20, 23, 23];
+personOne.trabalhoNotass = [45, 45];
+
 console.log(personOne);
-
-const personTwo = new Student('202001012', 'João da Silva');
-
-console.log(personTwo);
+console.log('Soma de todas as notas: ', personOne.sumGrades());
+console.log('Média de todas as notas: ', personOne.sumAverageGrade());
