@@ -83,6 +83,16 @@ class Student {
         return Math.round(sumGrades / divider);
     }
 }
+// para testar 
+/* const personOne = new Student('202001011', 'Maria da Silva');
+
+console.log(personOne);
+
+const personTwo = new Student('202001012', 'João da Silva');
+
+console.log(personTwo); */
+
+
 
 const personOne = new Student('202001011', 'Maria da Silva');
 
