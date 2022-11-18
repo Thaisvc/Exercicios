@@ -1,14 +1,14 @@
 // ./CepService.ts
-import FooCepAPI from './FooCepAPI';
+import ICep from './ICep';
 
 class CepService {
-  private readonly cepApi: FooCepAPI;
+  private readonly cepApi: ICep; // INVERSAO DE DEPENDENCIA
 
  /*  constructor() { ANTES
     this.cepApi = new FooCepAPI();
   } */
 
-  constructor(cepApi: FooCepAPI) { // INJEÇAO DE DEPENDENCIA
+  constructor(cepApi: ICep) { //PASSO 1 INJEÇAO DE DEPENDENCIA // PASSO 2 INVERSAO DE DEPENDENCIA
     this.cepApi = cepApi;
   }
 
