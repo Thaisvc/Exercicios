@@ -7,3 +7,8 @@ db.bios.find({_id: 8},{name: true })
 
 use('test');
 db.bios.find({_id: 8},{name: true, birth: true , _id:false})
+
+
+
+use('test');
+db.bios.find({'name.first': 'John'}).pretty()
