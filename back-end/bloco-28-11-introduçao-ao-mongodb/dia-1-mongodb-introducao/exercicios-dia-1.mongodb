@@ -36,3 +36,6 @@ db.bios.find().skip(5).limit(2)
 use('Books');
 db.books.countDocuments({})
 
+use('Books');
+db.books.countDocuments({ status: "PUBLISH" })
+
