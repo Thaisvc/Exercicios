@@ -1,0 +1,107 @@
+Gabarito: Exercícios - agora, a prática!
+O MongoDB possui diversas ferramentas como, por exemplo, mongo, mongosh, Compass e outras ferramentas de terceiros. Você pode utilizar o que achar melhor para executar as queries, o importante é realizá-las.
+
+Utilizando a coleção bios, construa queries para retornar os seguintes itens:
+
+Exercício 1: Retorne o documento com o _id igual a 8.
+
+Exercício 2: Retorne o documento com o _id igual a 8, mas só exiba os atributos: _id e name.
+
+🚀 Exercício 3: Retorne apenas os atributos name e birth do documento com o _id igual a 8.
+
+Exercício 4: Retorne todos os documentos em que o atributo name.first seja igual a John, utilizando o método pretty().
+
+Exercício 5: Retorne os 3 primeiros documentos da coleção bios utilizando o método pretty().
+
+Exercício 6: Retorne 2 documentos da coleção bios pulando os 5 primeiros documentos.
+
+Soluções propostas
+
+Exercício 1: Retorne o documento com _id igual a 8.
+
+Copiar
+db.bios.find({ _id: 8 })
+Exercício 2: Retorne o documento com _id igual a 8, mas só exiba os campos: _id e name.
+
+Copiar
+db.bios.find({ _id: 8 }, { name: 1 })
+Exercício 3: Retorne apenas os campos name e birth do documento com _id igual a 8.
+
+Copiar
+db.bios.find({ _id: 8 }, { name: 1, birth: 1, _id: 0 })
+Exercício 4: Retorne todos os documentos em que o campo name.first seja igual a John, utilizando o método pretty().
+
+Copiar
+db.bios.find({ "name.first": "John" }).pretty()
+Exercício 5: Retorne os 3 primeiros documentos da coleção bios utilizando o método pretty().
+
+Copiar
+db.bios.find().limit(3).pretty()
+Exercício 6: Retorne 2 documentos da coleção bios pulando os 5 primeiros documentos.
+
+Copiar
+db.bios.find().skip(5).limit(2)
+Utilizando o mongoimport, importe o arquivo books.json para a sua instância local do MongoDB e utilize a coleção books para construir as seguintes consultas:
+
+🚀 Exercício 7: Retorne a quantidade de documentos da coleção books.
+
+🚀 Exercício 8: Conte quantos livros existem com o status = "PUBLISH".
+
+🚀 Exercício 9: Exiba os atributos title, isbn e pageCount dos 3 primeiros livros. NÃO retorne o atributo _id.
+
+Exercício 10: Pule 5 documentos e exiba os atributos _id, title, authors e status dos livros com o status = "MEAP", limitando-se a 10 documentos.
+
+Soluções propostas
+
+Para importar a coleção books.json para um banco chamado class, utilize o comando abaixo:
+
+Copiar
+mongoimport --db class --collection books <caminho_do_arquivo>
+Caso esteja rodando o MongoDB via docker, utilize o comando abaixo para copiar o arquivo que deverá ser importado para dentro do seu container do MongoDB:
+
+Copiar
+docker cp nome-do-arquivo.json <nome-do-container-ou-id>:/tmp/nome-do-arquivo.json
+Em seguida, realize a importação do arquivo JSON para o MongoDB:
+
+Copiar
+docker exec <nome-do-container-ou-id> mongoimport -d <nome-do-banco> -c <nome-da-coleção> --file /tmp/nome-do-arquivo.json
+Após a importação, selecione o banco class no seu cliente:
+
+Copiar
+use class
+Exercício 7: Retorne a quantidade de documentos da coleção books.
+
+Copiar
+db.books.countDocuments({})
+Exercício 8: Conte quantos livros existem com o status "PUBLISH".
+
+Copiar
+db.books.countDocuments(
+    { status: "PUBLISH" }
+)
+Exercício 9: Exiba os campos title, isbn e pageCount dos 3 primeiros livros. NÃO retorne o campo _id.
+
+Copiar
+db.books.find(
+    {},
+    {
+        _id: 0,
+        title: 1,
+        isbn: 1,
+        pageCount: 1
+    }
+).limit(3).pretty()
+Exercício 10: Pule 5 documentos e exiba os campos _id, title, authors e status dos livros com status "MEAP", limitando a 10 documentos.
+
+Copiar
+db.books.find(
+    {
+        status: "MEAP"
+    },
+    {
+        title: 1,
+        authors: 1,
+        status: 1
+    }
+).skip(5).limit(10).pretty()
+Caso você não tenha conseguido fazer esse exercício, reforce seus estudos sobre os conceitos básicos de MongoDB.
