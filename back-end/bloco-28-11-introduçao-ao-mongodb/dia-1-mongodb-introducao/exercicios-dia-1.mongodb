@@ -36,6 +36,11 @@ db.bios.find().skip(5).limit(2)
 use('Books');
 db.books.countDocuments({})
 
+
 use('Books');
 db.books.countDocuments({ status: "PUBLISH" })
+
+
+use('Books');
+db.books.find({},{title: 1, isbn: 1 , pageCount: 1, _id:0}).limit(3)
 
