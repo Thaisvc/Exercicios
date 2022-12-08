@@ -1,2 +1,9 @@
 use('test');
+db.bios.find({_id: 8})
+
+use('test');
 db.bios.find({_id: 8},{name: true })
+
+
+use('test');
+db.bios.find({_id: 8},{name: true, birth: true , _id:false})
