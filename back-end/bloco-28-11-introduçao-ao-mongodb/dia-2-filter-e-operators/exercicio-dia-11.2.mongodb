@@ -121,3 +121,10 @@ use('Herois');
 db.herois.deleteOne(
     { publisher: "Sony Pictures" }
 );
+
+
+
+use('Herois');
+db.herois.deleteMany(
+    { publisher: "George Lucas" }
+);
