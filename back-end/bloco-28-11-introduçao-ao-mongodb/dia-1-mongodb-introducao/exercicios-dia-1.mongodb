@@ -1,0 +1,49 @@
+use('test');
+db.bios.find({_id: 8})
+
+
+use('test');
+db.bios.find({_id: 8},{name: true })
+
+
+use('test');
+db.bios.find({_id: 8},{name: true, birth: true , _id:false})
+
+
+use('test');
+db.bios.find({'name.first': 'John'}).pretty()
+
+
+use('test');
+db.bios.find().limit(3).pretty()
+
+
+use('test');
+db.bios.find().skip(5).limit(2)
+
+
+// IMPORTAÇAO COM DOCKER
+// 1 COPIAR O ARQUIVO PARA O DOCKER
+// docker cp nome-do-arquivo.json <nome-do-container-ou-id>:/tmp/nome-do-arquivo.json  
+//  docker cp books.json 7ae920054c86:/tmp/books.json     
+
+// 2 IMPORTAR O ARQUIVO PARA O MONGODB
+// docker exec <nome-do-container-ou-id> mongoimport -d <nome-do-banco> -c <nome-da-coleção> --file /tmp/nome-do-arquivo.json
+//  docker exec 7ae920054c86 mongoimport -d Books -c books --file /tmp/books.json
+// ASSI GERA UM ERRO Failed: cannot decode array into a primitive.D QUE SE RESOLVE COM --jsonArray 
+// docker exec 7ae920054c86 mongoimport -d Books -c books --file /tmp/books.json --jsonArray
+
+use('Books');
+db.books.countDocuments({})
+
+
+use('Books');
+db.books.countDocuments({ status: "PUBLISH" })
+
+
+use('Books');
+db.books.find({},{title: 1, isbn: 1 , pageCount: 1, _id:0}).limit(3)
+
+
+use('Books');
+db.books.find({status:"MEAP"},{title:1, authors:1 , status:1}).skip(5).limit(10)
