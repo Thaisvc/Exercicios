@@ -20,3 +20,5 @@ db.herois.countDocuments({'aspects.height': {$lte : 180}});
 use('Herois');
 db.herois.findOne({'aspects.height': {$gte : 200}});
 
+use('Herois');
+db.herois.countDocuments({'aspects.height': {$gte : 200}});
