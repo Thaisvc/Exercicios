@@ -32,3 +32,9 @@ db.herois.find({'aspects.eyeColor': {$eq : 'green'}}).pretty();
 
 use('Herois');
 db.herois.countDocuments({'aspects.eyeColor': {$eq : 'blue'}});
+
+
+use('Herois');
+db.herois.find(
+    { "aspects.hairColor": { $in: ["black", "No Hair"] } }
+).pretty();
