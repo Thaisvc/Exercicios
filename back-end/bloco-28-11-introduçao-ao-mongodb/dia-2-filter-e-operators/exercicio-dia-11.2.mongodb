@@ -54,3 +54,14 @@ use('Herois');
 db.herois.countDocuments(
     { "aspects.height": { $not: { $gt: 180 } } }
 );
+
+
+use('Herois');
+db.herois.find(
+    {
+        $nor: [
+            { race: "Human" },
+            { "aspects.height": { $gt: 180 } }
+        ]
+    }
+).pretty();
