@@ -115,3 +115,9 @@ use('Herois');
 db.herois.countDocuments(
     { "aspects.hairColor": { $exists: true } }
 );
+
+
+use('Herois');
+db.herois.deleteOne(
+    { publisher: "Sony Pictures" }
+);
