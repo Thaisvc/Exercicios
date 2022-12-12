@@ -1,0 +1,8 @@
+// IMPORTAR ARQUIVO DE OUTROS LOCAIS --> docker cp ~/Documentos/superheroes.json 7ae920054c86:/tmp/superheroes.json  
+
+use Herois;
+db.herois.countDocuments({});
+use('Herois');
+db.herois.find({});
+
+
