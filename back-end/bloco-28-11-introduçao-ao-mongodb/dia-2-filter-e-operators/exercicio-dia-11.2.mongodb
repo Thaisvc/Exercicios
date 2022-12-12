@@ -100,3 +100,11 @@ db.herois.find(
         ]
     }
 ).pretty();
+
+
+
+
+use('Herois');
+db.herois.countDocuments(
+    { race: { $exists: false } }
+);
