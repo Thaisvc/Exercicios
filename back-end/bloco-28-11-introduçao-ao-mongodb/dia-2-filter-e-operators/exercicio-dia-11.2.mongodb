@@ -2,7 +2,11 @@
 
 use Herois;
 db.herois.countDocuments({});
+
 use('Herois');
 db.herois.find({});
+
+use('Herois');
+db.herois.find({'aspects.height': {$lt : 180}}).pretty();
 
 
