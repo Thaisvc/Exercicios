@@ -49,3 +49,8 @@ use('Herois');
 db.herois.countDocuments(
     { "aspects.hairColor": { $nin: ["black", "No Hair"] } }
 );
+
+use('Herois');
+db.herois.countDocuments(
+    { "aspects.height": { $not: { $gt: 180 } } }
+);
