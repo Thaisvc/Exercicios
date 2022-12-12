@@ -38,3 +38,9 @@ use('Herois');
 db.herois.find(
     { "aspects.hairColor": { $in: ["black", "No Hair"] } }
 ).pretty();
+
+
+use('Herois');
+db.herois.countDocuments(
+    { "aspects.hairColor": { $in: ["black", "No Hair"] } }
+);
