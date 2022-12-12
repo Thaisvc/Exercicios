@@ -108,3 +108,10 @@ use('Herois');
 db.herois.countDocuments(
     { race: { $exists: false } }
 );
+
+
+
+use('Herois');
+db.herois.countDocuments(
+    { "aspects.hairColor": { $exists: true } }
+);
