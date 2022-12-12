@@ -65,3 +65,19 @@ db.herois.find(
         ]
     }
 ).pretty();
+
+
+
+use('Herois');
+db.herois.find(
+    {
+        $and:[
+            {
+                $or: [{ "aspects.height": 180 }, { "aspects.height": 200 }]
+            },
+            {
+                publisher: "Marvel Comics"
+            }
+        ]
+    }
+).pretty();
