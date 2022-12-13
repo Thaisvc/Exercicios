@@ -97,3 +97,15 @@ db.movies.updateOne(
     $set: { "category.1": "thriller" },
   },
 );
+
+
+
+
+db.movies.updateOne(
+  { title: "Home Alone" },
+  {
+    $currentDate: {
+      lastUpdated: { $type: "timestamp" },
+    },
+  },
+);
