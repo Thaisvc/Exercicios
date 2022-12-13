@@ -1,0 +1,130 @@
+// IMPORTAR ARQUIVO DE OUTROS LOCAIS --> docker cp ~/Documentos/superheroes.json 7ae920054c86:/tmp/superheroes.json  
+
+use Herois;
+db.herois.countDocuments({});
+
+use('Herois');
+db.herois.find({});
+
+use('Herois');
+db.herois.find({'aspects.height': {$lt : 180}}).pretty();
+
+
+use('Herois');
+db.herois.countDocuments({'aspects.height': {$lt : 180}});
+
+use('Herois');
+db.herois.countDocuments({'aspects.height': {$lte : 180}});
+
+
+use('Herois');
+db.herois.findOne({'aspects.height': {$gte : 200}});
+
+use('Herois');
+db.herois.countDocuments({'aspects.height': {$gte : 200}});
+
+
+use('Herois');
+db.herois.find({'aspects.eyeColor': {$eq : 'green'}}).pretty();
+/* ou db.herois.find(
+    { "aspects.eyeColor": "green"}
+);*/
+
+use('Herois');
+db.herois.countDocuments({'aspects.eyeColor': {$eq : 'blue'}});
+
+
+use('Herois');
+db.herois.find(
+    { "aspects.hairColor": { $in: ["black", "No Hair"] } }
+).pretty();
+
+
+use('Herois');
+db.herois.countDocuments(
+    { "aspects.hairColor": { $in: ["black", "No Hair"] } }
+);
+
+use('Herois');
+db.herois.countDocuments(
+    { "aspects.hairColor": { $nin: ["black", "No Hair"] } }
+);
+
+use('Herois');
+db.herois.countDocuments(
+    { "aspects.height": { $not: { $gt: 180 } } }
+);
+
+
+use('Herois');
+db.herois.find(
+    {
+        $nor: [
+            { race: "Human" },
+            { "aspects.height": { $gt: 180 } }
+        ]
+    }
+).pretty();
+
+
+
+use('Herois');
+db.herois.find(
+    {
+        $and:[
+            {
+                $or: [{ "aspects.height": 180 }, { "aspects.height": 200 }]
+            },
+            {
+                publisher: "Marvel Comics"
+            }
+        ]
+    }
+).pretty();
+
+
+
+use('Herois');
+db.herois.find(
+    {
+        $and: [
+            {
+                "aspects.weight": { $gte: 80, $lte: 100 }
+            },
+            {
+                $or: [{ race: "Human" }, { race: "Mutant" }]
+            },
+            {
+                publisher: { $ne: "DC Comics" }
+            }
+        ]
+    }
+).pretty();
+
+
+
+
+use('Herois');
+db.herois.countDocuments(
+    { race: { $exists: false } }
+);
+
+
+
+use('Herois');
+db.herois.countDocuments(
+    { "aspects.hairColor": { $exists: true } }
+);
+
+
+use('Herois');
+db.herois.deleteOne(
+    { publisher: "Sony Pictures" }
+);
+
+
+
+use('Herois');
+db.herois.deleteMany(
+    { publisher: "George Lucas" }
+);
