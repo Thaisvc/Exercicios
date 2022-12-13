@@ -144,3 +144,14 @@ db.movies.find(
     }
   }
 ).pretty();
+
+
+
+
+db.movies.find(
+  {
+    description: {
+      $regex: /humanity.$/
+    }
+  }
+).pretty();
