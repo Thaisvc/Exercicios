@@ -116,3 +116,16 @@ db.movies.updateMany(
   {},
   { $set: { sequels: 0 } },
 );
+
+
+
+
+db.movies.updateMany(
+  {},
+  {
+    $unset: {
+      budget: "",
+      estimatedBudget: "",
+    },
+  },
+);
