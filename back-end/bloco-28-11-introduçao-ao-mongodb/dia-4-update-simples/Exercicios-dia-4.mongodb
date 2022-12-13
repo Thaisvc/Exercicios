@@ -64,3 +64,11 @@ db.movies.updateOne(
   { title: "Home Alone" },
   { $inc: { budget: 5 } },
 );
+
+
+
+
+db.movies.updateOne(
+  { title: "Batman" },
+  { $mul: { imdbRating: 4 } },
+);
