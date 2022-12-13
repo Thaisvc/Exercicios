@@ -133,3 +133,14 @@ db.movies.find({ $and: [
   { category: { $in: ["adventure", "family"] } },
   { imdbRating: { $not: { $lt: 7 } }}
 ]});
+
+
+
+
+db.movies.find(
+  {
+    description: {
+      $regex: /^The/
+    }
+  }
+).pretty();
