@@ -62,3 +62,11 @@ db.movies.updateOne(
     $pull: { category: "action" },
   },
 );
+
+
+db.movies.updateOne(
+  { title: "Batman" },
+  {
+    $pop: { category: -1 },
+  },
+);
