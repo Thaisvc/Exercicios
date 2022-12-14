@@ -79,3 +79,12 @@ db.movies.updateOne(
     $pop: { category: 1 },
   },
 );
+
+
+
+db.movies.updateOne(
+  { title: "Batman" },
+  {
+    $addToSet: { category: "action" },
+  },
+);
