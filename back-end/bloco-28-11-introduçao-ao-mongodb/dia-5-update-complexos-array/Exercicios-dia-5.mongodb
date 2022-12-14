@@ -172,3 +172,14 @@ db.movies.updateOne(
     $push: { "cast.$.actor": "Christian Bale" },
   },
 );
+
+
+db.movies.updateOne(
+  {
+    title: "Batman",
+    "cast.character": "Alfred",
+  },
+  {
+    $push: { "cast.$.actor": "Michael Caine" },
+  },
+);
