@@ -40,3 +40,17 @@ db.movies.updateOne(
     $push: { category: "superhero" },
   },
 );
+
+
+
+
+db.movies.updateOne(
+  { title: "Batman" },
+  {
+    $push: {
+      category: {
+        $each: ["villain", "comic-based"],
+      },
+    },
+  },
+);
