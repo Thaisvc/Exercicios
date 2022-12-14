@@ -183,3 +183,15 @@ db.movies.updateOne(
     $push: { "cast.$.actor": "Michael Caine" },
   },
 );
+
+
+
+db.movies.updateOne(
+  {
+    title: "Batman",
+    "cast.character": "Coringa",
+  },
+  {
+    $push: { "cast.$.actor": "Heath Ledger" },
+  },
+);
