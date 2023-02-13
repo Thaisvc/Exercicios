@@ -10,3 +10,14 @@ def mean(numbers):
         total += number # = number + total
     return total / len(numbers)  # a soma de todos os numeros divido pelo tamanho da lista """
 
+def prints (n):
+    if n > 1 :
+        return print('*' * n)
+    else:
+        return  print('deu ruim')
+    
+  #GABARITO 👇
+
+def draw_square(n):
+    for row in range(n):
+        print(n * '*')
