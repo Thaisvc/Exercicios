@@ -27,3 +27,5 @@ print("Área do círculo:", circle(3))
 
 
 lista = [1, 2, 3]
+
+print("Olá Mundo")

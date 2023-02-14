@@ -6,5 +6,10 @@
         "-l 79"
     ],
     "python.formatting.provider": "black",
-// ...
+    // ...
+    "code-runner.executorMap": {
+        "python": "python3 -u"
+    },
+    "code-runner.runInTerminal": true,
+    // ...
 }
