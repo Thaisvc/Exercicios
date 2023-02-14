@@ -1,0 +1,15 @@
+{
+    // ...
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.blackArgs": [
+        "-l 79"
+    ],
+    "python.formatting.provider": "black",
+    // ...
+    "code-runner.executorMap": {
+        "python": "python3 -u"
+    },
+    "code-runner.runInTerminal": true,
+    // ...
+}
