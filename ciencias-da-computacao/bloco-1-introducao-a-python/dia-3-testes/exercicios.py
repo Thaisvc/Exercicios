@@ -84,3 +84,19 @@ def validate_email(email):
     if counter > 3:
         raise ValueError("Extension maximum length is 3")
     return None
+
+
+
+# 4
+
+
+def filter_valid_emails(emails):
+    valid_emails = []
+    for email in emails:
+        try:
+            validate_email(email)
+        except ValueError as exc:
+            print(exc)
+        else:
+            valid_emails.append(email)
+    return valid_emails
