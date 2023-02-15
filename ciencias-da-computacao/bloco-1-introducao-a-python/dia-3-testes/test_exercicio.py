@@ -1,4 +1,4 @@
-from exercicios import fizzbuzz
+from exercicios import fizzbuzz, translate_to_number
 
 def test_fizzbuzz_should_return_list_of_numbers():
     assert fizzbuzz(2) == [1, 2]
