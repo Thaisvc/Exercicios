@@ -1,5 +1,7 @@
 import requests
 import parsel
+from pymongo import MongoClient
+
 #1
 response = requests.get("https://httpbin.org/encoding/utf8")
 print(response.text)
@@ -36,7 +38,6 @@ cover = URL_BASE + selector.css("#product_gallery img::attr(src)").get()
 print(title, price, description, cover, sep=",")
 
 #5
-
 URL_BASE = "http://books.toscrape.com/catalogue/"
 response = requests.get(URL_BASE + "the-grand-design_405/index.html")
 selector = parsel.Selector(response.text)
@@ -55,3 +56,9 @@ availability = selector.css(".product_main .availability::text").re_first("\d")
 
 print(title, price, description, cover, availability, sep=",")
 
+#6
+category = input("Escolha uma categoria: ")
+with MongoClient() as client:
+    db = client.library
+    for book in db.books.find({"categories": category}, projection=["title"]):
+        print(book["title"])
