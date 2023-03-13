@@ -1,0 +1,34 @@
+1678713850825	geckodriver	INFO	Listening on 127.0.0.1:54899
+1678713850836	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "37067" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileZH0rao"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1678713852009	Marionette	INFO	Marionette enabled
+1678713852014	Marionette	INFO	Listening on port 44337
+Read port: 44337
+WebDriver BiDi listening on ws://127.0.0.1:37067
+1678713852178	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: ({})
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileZH0rao/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:37067/devtools/browser/47d176c8-d519-4375-bba0-fc187404aaec
+JavaScript error: https://media.ethicalads.io/media/client/v1.4.0/ethicalads.min.js, line 1: Error: No ad placements found.
+JavaScript error: resource:///actors/FormValidationChild.sys.mjs, line 178: TypeError: this._element is null
+1678714157791	geckodriver	INFO	Listening on 127.0.0.1:45713
+1678714157798	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "40921" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilebtcOz3"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1678714158789	Marionette	INFO	Marionette enabled
+1678714158794	Marionette	INFO	Listening on port 37001
+Read port: 37001
+WebDriver BiDi listening on ws://127.0.0.1:40921
+1678714158936	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: ({})
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilebtcOz3/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:40921/devtools/browser/d17705ed-09db-40ab-89b0-47a78e6fe966
