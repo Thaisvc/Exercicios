@@ -32,3 +32,35 @@ WebDriver BiDi listening on ws://127.0.0.1:40921
 console.error: ({})
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilebtcOz3/search.json.mozlz4", (void 0)))
 DevTools listening on ws://127.0.0.1:40921/devtools/browser/d17705ed-09db-40ab-89b0-47a78e6fe966
+1678714235582	geckodriver	INFO	Listening on 127.0.0.1:40717
+1678714235585	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "45513" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileoPQq4j"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1678714236559	Marionette	INFO	Marionette enabled
+1678714236563	Marionette	INFO	Listening on port 37177
+Read port: 37177
+WebDriver BiDi listening on ws://127.0.0.1:45513
+1678714236692	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: ({})
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileoPQq4j/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:45513/devtools/browser/99838534-363a-493e-93dc-f74fe0728635
+1678714257116	geckodriver	INFO	Listening on 127.0.0.1:33229
+1678714257125	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "--remote-debugging-port" "55391" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileKFE3db"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1678714258148	Marionette	INFO	Marionette enabled
+1678714258152	Marionette	INFO	Listening on port 43301
+Read port: 43301
+WebDriver BiDi listening on ws://127.0.0.1:55391
+1678714258285	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: ({})
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileKFE3db/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55391/devtools/browser/9b4ffd6e-9e32-4f1e-b859-027f8d2c0b15

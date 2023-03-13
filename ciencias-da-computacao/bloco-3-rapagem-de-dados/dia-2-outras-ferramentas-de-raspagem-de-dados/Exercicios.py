@@ -1,9 +1,32 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-# criação de uma instância de navegador utilizando o Firefox
 firefox = webdriver.Firefox()
 
-response = firefox.get("https://quotes.toscrape.com/")
+def scrape(url):
+        firefox.get(url)
 
-search_quest = firefox.find_element(By.CLASS_NAME, 'text').get_attribute('innerHTML')
+        quote = firefox.find_element(By.CLASS_NAME, 'text').get_attribute('innerHTML')
+
+        print(quote)
+
+scrape('https://quotes.toscrape.com/')
+
+
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+
+options = Options()
+options.add_argument('--headless')
+
+firefox = webdriver.Firefox(options=options)
+
+def scrape(url):
+    firefox.get(url)
+    paragraphs  = firefox.find_elements(By.TAG_NAME, 'p')
+    for p in paragraphs:
+        print(p.text)
+
+scrape('https://www.wikimetal.com.br/iron-maiden-scorpions-kiss-veja-melhores-albuns-1982/')
