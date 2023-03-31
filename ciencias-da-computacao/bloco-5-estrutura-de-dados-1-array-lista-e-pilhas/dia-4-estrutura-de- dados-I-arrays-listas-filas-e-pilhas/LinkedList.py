@@ -5,7 +5,7 @@ class LinkedList:           # implementando uma lista
 
     def __init__(self):
         self.head_value = None
-        self.__length = 0 
+        self.__length = 0
 
     def __str__(self):
         return f"LinkedList(len={self.__length}, head={self.head_value})"
@@ -13,13 +13,13 @@ class LinkedList:           # implementando uma lista
     def __len__(self):          # define o tamanho da lista
         return self.__length
 
-    def insert_first(self, value):     # informar que o elemento que estamos inserindo
+    def insert_first(self, value):   # informar que o elemento que estamos inserindo
         first_value = Node(value)
         first_value.next = self.head_value
         self.head_value = first_value
         self.__length += 1
 
-    def insert_last(self, value):    # estamos inserindo seja o último na nossa estrutura
+    def insert_last(self, value):  # estamos inserindo seja o último na nossa estrutura
         last_value = Node(value)
 
         if self.is_empty():
@@ -27,7 +27,7 @@ class LinkedList:           # implementando uma lista
 
         current_value = self.head_value
 
-        while current_value.next: #O(n)
+        while current_value.next:  # O(n)
             current_value = current_value.next
         current_value.next = last_value
         self.__length += 1
@@ -46,7 +46,7 @@ class LinkedList:           # implementando uma lista
         current_value.next = next_value
         self.__length += 1
 
-    def remove_first(self):        #  remover do inicio
+    def remove_first(self):  # remover do inicio
         value_to_be_removed = self.head_value
         if value_to_be_removed:
             self.head_value = self.head_value.next
@@ -69,7 +69,7 @@ class LinkedList:           # implementando uma lista
         self.__length -= 1
         return value_to_be_removed
 
-    def remove_at(self, position):            # remover em qualquer posição
+    def remove_at(self, position):      # remover em qualquer posição
         if position < 1:
             return self.remove_first()
         if position >= len(self):
@@ -88,7 +88,7 @@ class LinkedList:           # implementando uma lista
 
         return value_to_be_removed
 
-    def get_element_at(self, position):     # obter elemento em qualquer posição
+    def get_element_at(self, position):   # obter elemento em qualquer posição
         value_returned = None
         value_to_be_returned = self.head_value
         if value_to_be_returned:
@@ -99,5 +99,5 @@ class LinkedList:           # implementando uma lista
                 value_returned = Node(value_to_be_returned.value)
         return value_returned
 
-    def is_empty(self):             # informar que esta estrutura esta vazia
+    def is_empty(self):       # informar que esta estrutura esta vazia
         return not self.__length
