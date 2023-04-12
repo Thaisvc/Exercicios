@@ -86,8 +86,6 @@ else:
     print("Deu empate")
 
 
-
-
 def longer_no_repeating_substring_len(string):
     biggest = 0
     for index, _ in enumerate(string):
